@@ -4,8 +4,7 @@
 
 ## तकनीकी स्टैक
 
-- Astro **7.3.2**
-- @astrojs/cloudflare **14.3.1**
+- Astro **7.3.2** (static output)
 - @astrojs/sitemap **3.7.4**
 - Tailwind CSS **4.3.3**
 - @tailwindcss/vite **4.3.3**
@@ -47,9 +46,14 @@ pnpm check
 pnpm build
 ```
 
-## Cloudflare Worker deploy
+## Cloudflare deploy (Workers Static Assets)
+
+यह साइट पूरी तरह स्टैटिक है, इसलिए कोई server adapter नहीं लगाया गया। `astro build` से `dist/` बनता है
+और `wrangler.jsonc` का `assets.directory` उसी `dist/` की ओर इशारा करता है — `wrangler deploy` सीधे
+स्टैटिक assets को Worker पर प्रकाशित करता है।
 
 ```bash
+pnpm build
 pnpm deploy
 ```
 
