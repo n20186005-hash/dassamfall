@@ -9,6 +9,7 @@
     "pnpm": "10.11.1"
   },
   "scripts": {
+    "prebuild": "node -e \"require('node:fs').rmSync('.wrangler', { recursive: true, force: true })\"",
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
