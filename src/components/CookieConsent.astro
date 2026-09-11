@@ -1,0 +1,68 @@
+---
+const gaId = 'G-HXM22WWPKP';
+---
+
+<div class="cookie-banner" id="cookie-banner" hidden>
+  <div class="cookie-panel">
+    <div class="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+      <div class="max-w-2xl">
+        <h2 class="m-0 text-lg font-semibold">कुकी व विश्लेषण अनुमति</h2>
+        <p class="mt-2 text-sm leading-7 text-white/75">
+          यह साइट केवल आपकी सहमति मिलने पर Google Analytics 4 ({gaId}) लोड करती है।
+          आपकी पसंद इसी ब्राउज़र के localStorage में सुरक्षित रखी जाती है।
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <button class="button-secondary" type="button" data-cookie-action="reject">केवल आवश्यक</button>
+        <button class="button-primary" type="button" data-cookie-action="accept">स्वीकार करें</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script is:inline define:vars={{ gaId }}>
+  (() => {
+    const storageKey = 'dassam-falls-cookie-consent';
+    const banner = document.getElementById('cookie-banner');
+    if (!banner) return;
+
+    const injectGa = () => {
+      if (window.__dassamGaLoaded) return;
+      window.__dassamGaLoaded = true;
+
+      const script = document.createElement('script');
+      script.async = true;
+      script.src = `https://www.googletagmanager.com/gtag/js?id=${gaId}`;
+      document.head.appendChild(script);
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){ window.dataLayer.push(arguments); }
+      window.gtag = gtag;
+      gtag('js', new Date());
+      gtag('config', gaId, { anonymize_ip: true });
+    };
+
+    const stored = localStorage.getItem(storageKey);
+    if (stored === 'accepted') {
+      injectGa();
+      return;
+    }
+
+    if (stored !== 'rejected') {
+      banner.hidden = false;
+    }
+
+    banner.querySelectorAll('[data-cookie-action]').forEach((button) => {
+      button.addEventListener('click', () => {
+        const action = button.getAttribute('data-cookie-action');
+        if (action === 'accept') {
+          localStorage.setItem(storageKey, 'accepted');
+          injectGa();
+        } else {
+          localStorage.setItem(storageKey, 'rejected');
+        }
+        banner.hidden = true;
+      });
+    });
+  })();
+</script>

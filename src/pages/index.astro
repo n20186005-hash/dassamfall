@@ -1,0 +1,400 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const photos = [
+  {
+    src: '/images/dassam-falls-01.jpg',
+    alt: 'दशम जलप्रपात का ऊँचाई से दिखता शक्तिशाली दृश्य',
+    caption: 'बरसात और बाद के महीनों में बहाव सबसे प्रभावशाली दिखता है।',
+  },
+  {
+    src: '/images/dassam-falls-02.jpg',
+    alt: 'घने हरियाले और चट्टानी तल के बीच फैला दशम जलप्रपात',
+    caption: 'चट्टानी परतों पर फैलती बहुधाराएँ इस स्थल की पहचान हैं।',
+  },
+  {
+    src: '/images/dassam-falls-03.jpg',
+    alt: 'जलप्रपात का विस्तृत फ्रंट व्यू',
+    caption: 'ऊपरी व्यू-पॉइंट और नीचे के दर्शन-बिंदु दोनों अलग अनुभव देते हैं।',
+  },
+  {
+    src: '/images/dassam-falls-04.jpg',
+    alt: 'चट्टानों के बीच नीचे उतरती जलधारा और पर्यटक',
+    caption: 'फिसलन के कारण किनारों पर विशेष सावधानी आवश्यक है।',
+  },
+];
+
+const facts = [
+  ['रेटिंग', '4.5 / 5'],
+  ['समीक्षाएँ', '15,959'],
+  ['ऊँचाई', 'लगभग 144 फ़ीट'],
+  ['नदी', 'काँची नदी'],
+];
+
+const nearbyFood = [
+  'तैमारा और बुंडू मार्ग पर स्थानीय ढाबे, चाय स्टॉल और हल्के नाश्ते की दुकानें मिल सकती हैं।',
+  'झारखण्डी स्वाद के लिए धुस्का-घुघनी, पकौड़ी, चाय और साधारण थाली जैसे विकल्प तलाशें।',
+  'भीड़-भाड़ वाले दिनों में स्टॉल अधिक सक्रिय होते हैं; फिर भी पीने का पानी अपने साथ रखना बेहतर है।',
+];
+
+const nearbyAttractions = [
+  {
+    name: 'हुंडरू फॉल्स',
+    detail: 'राँची क्षेत्र का प्रसिद्ध जलप्रपात; जलप्रपात-दिवस यात्रा के लिए लोकप्रिय संयोजन।',
+  },
+  {
+    name: 'जोन्हा फॉल्स',
+    detail: 'हरा-भरा, शांत वातावरण और अलग घाटी अनुभव वाला जलप्रपात।',
+  },
+  {
+    name: 'सीता फॉल',
+    detail: 'छोटा पर प्राकृतिक, शांत परिवेश के कारण फ़ोटो और छोटी यात्रा के लिए उपयुक्त।',
+  },
+  {
+    name: 'गेटलसुद डैम',
+    detail: 'राँची के आसपास जलाशय दृश्य और शाम के ठहराव के लिए उपयुक्त विकल्प।',
+  },
+];
+
+const faq = [
+  {
+    q: 'दशम जलप्रपात जाने का सबसे अच्छा समय कौन-सा है?',
+    a: 'अक्टूबर से जनवरी का समय सबसे लोकप्रिय माना जाता है। बरसात के बाद जलप्रवाह प्रबल रहता है, हरियाली घनी होती है और दृश्य सबसे आकर्षक दिखता है।',
+  },
+  {
+    q: 'क्या यहाँ स्नान या पानी में उतरना सुरक्षित है?',
+    a: 'नहीं। तेज धारा, फिसलन भरी चट्टानें और गहराई वाले हिस्से जोखिम पैदा कर सकते हैं। स्थल पर लगे सुरक्षा निर्देशों का पालन करें और पानी के बहुत निकट न जाएँ।',
+  },
+  {
+    q: 'क्या परिवार और बच्चों के साथ जाया जा सकता है?',
+    a: 'हाँ, लेकिन बच्चों को हमेशा साथ रखें। चट्टानों, सीढ़ियों और व्यू-पॉइंट क्षेत्रों में विशेष ध्यान रखें।',
+  },
+  {
+    q: 'वहाँ पहुँचने का सबसे सुविधाजनक तरीका क्या है?',
+    a: 'राँची से सड़क मार्ग सबसे सुविधाजनक है। निजी कार, टैक्सी या स्वयं-ड्राइव वाहन से पहुँचना सबसे आसान रहता है।',
+  },
+  {
+    q: 'प्रवेश शुल्क और पार्किंग के बारे में पहले से क्या जानना चाहिए?',
+    a: 'शुल्क या वाहन-शुल्क समय-समय पर बदल सकते हैं। इस पृष्ठ पर कोई निश्चित राशि जानबूझकर नहीं दी गई है; स्थल पर प्रदर्शित सूचना ही अंतिम मानी जाए।',
+  },
+];
+
+const attractionJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'TouristAttraction',
+  name: 'Dassam Falls',
+  alternateName: ['दशम जलप्रपात', 'दशम फॉल्स', 'Dassam Ghagh'],
+  description: 'झारखण्ड के राँची ज़िले के पास स्थित प्राकृतिक जलप्रपात, जो काँची नदी पर लगभग 144 फ़ीट की ऊँचाई से गिरता है।',
+  image: photos.map((item) => (Astro.site ? new URL(item.src, Astro.site).toString() : item.src)),
+  url: Astro.site ? new URL('/', Astro.site).toString() : undefined,
+  telephone: undefined,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: '4FW8+GV5, Tarub',
+    addressLocality: 'Ranchi district',
+    addressRegion: 'Jharkhand',
+    postalCode: '835204',
+    addressCountry: 'IN',
+  },
+  geo: {
+    '@type': 'GeoCoordinates',
+    latitude: 23.14593,
+    longitude: 85.467127,
+  },
+  openingHoursSpecification: [
+    {
+      '@type': 'OpeningHoursSpecification',
+      dayOfWeek: [
+        'https://schema.org/Monday',
+        'https://schema.org/Tuesday',
+        'https://schema.org/Wednesday',
+        'https://schema.org/Thursday',
+        'https://schema.org/Friday',
+        'https://schema.org/Saturday',
+        'https://schema.org/Sunday',
+      ],
+      opens: '08:00',
+      closes: '18:00',
+    },
+  ],
+  aggregateRating: {
+    '@type': 'AggregateRating',
+    ratingValue: '4.5',
+    reviewCount: '15959',
+    bestRating: '5',
+    worstRating: '1',
+  },
+};
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.a,
+    },
+  })),
+};
+
+const pageTitle = 'दशम जलप्रपात — राँची के पास झारखण्ड का शानदार जलप्रपात';
+const pageDescription = 'दशम जलप्रपात की यात्रा योजना: मुख्य जानकारी, पहुँच मार्ग, देखने का सर्वोत्तम समय, सुरक्षा, पार्किंग, पास के आकर्षण और वास्तविक फोटो।';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} jsonLd={[attractionJsonLd, faqJsonLd]}>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-black/25 backdrop-blur-xl">
+    <div class="container flex items-center justify-between gap-6 py-4">
+      <a class="flex items-center gap-3" href="#top">
+        <img src="/logo.svg" alt="दशम जलप्रपात लोगो" class="h-10 w-auto" />
+      </a>
+      <nav class="hidden gap-5 text-sm text-white/80 md:flex">
+        <a href="#overview">परिचय</a>
+        <a href="#plan">यात्रा योजना</a>
+        <a href="#gallery">गैलरी</a>
+        <a href="#map">मानचित्र</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="relative overflow-hidden">
+      <div class="absolute inset-0">
+        <img src={photos[1].src} alt={photos[1].alt} class="h-full w-full object-cover" />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+
+      <div class="container relative z-10 grid min-h-[88vh] items-end gap-12 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24">
+        <div class="max-w-3xl">
+          <div class="section-kicker">झारखण्ड · राँची क्षेत्र · प्राकृतिक जलप्रपात</div>
+          <h1 class="mt-6 text-5xl font-black leading-tight tracking-tight text-white md:text-7xl">
+            दशम जलप्रपात
+          </h1>
+          <p class="mt-4 max-w-2xl text-lg leading-8 text-white/84 md:text-xl">
+            काँची नदी की शक्तिशाली धाराओं से बनता यह प्रसिद्ध जलप्रपात राँची के पास प्रकृति,
+            चट्टानी भू-दृश्य और बरसात के बाद के जोशीले जलप्रवाह का अद्भुत मेल प्रस्तुत करता है।
+          </p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a class="badge-link" href="#map">📍 मानचित्र देखें</a>
+            <a class="badge-link" href="#plan">🧭 यात्रा योजना</a>
+            <a class="badge-link" href="#safety">⚠️ सुरक्षा सुझाव</a>
+          </div>
+        </div>
+
+        <aside class="glass rounded-[1.8rem] p-5 md:p-6">
+          <div class="grid grid-cols-2 gap-4">
+            {facts.map(([label, value]) => (
+              <div class="card">
+                <div class="text-sm text-white/70">{label}</div>
+                <div class="metric-value mt-3">{value}</div>
+              </div>
+            ))}
+          </div>
+          <div class="mt-5 rounded-3xl border border-white/12 bg-white/5 p-5">
+            <p class="m-0 text-sm uppercase tracking-[0.18em] text-[#f4deb0]">पता</p>
+            <p class="mt-3 text-base leading-7 text-white/85">4FW8+GV5, Tarub, Jharkhand 835204, India</p>
+            <p class="mt-3 text-sm leading-7 text-white/72">
+              राँची से लगभग 35–45 किमी, प्रारंभिक बिंदु और चुने गए मार्ग के अनुसार दूरी बदल सकती है।
+            </p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="overview" class="section">
+      <div class="container grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <div class="section-kicker">परिचय</div>
+          <h2 class="section-title mt-5">क्यों खास है यह जलप्रपात?</h2>
+          <p class="prose-muted mt-5">
+            दशम जलप्रपात झारखण्ड की उन प्राकृतिक जगहों में है जहाँ पानी, चट्टान और वनस्पति एक साथ
+            बहुत प्रभावशाली दृश्य बनाते हैं। स्थानीय रूप से इसे “दशम घाघ” भी कहा जाता है। कई यात्रियों के लिए
+            यह राँची से एक दिन की यात्रा, परिवार के साथ प्रकृति-भ्रमण और फ़ोटोग्राफ़ी के लिए पसंदीदा स्थल है।
+          </p>
+          <p class="prose-muted mt-4">
+            जलप्रपात की ऊँचाई लगभग 144 फ़ीट मानी जाती है। बरसात के बाद इसका बहाव सबसे शक्तिशाली और दृश्य सबसे
+            जीवंत हो जाता है। फिर भी यही मौसम अतिरिक्त सावधानी भी माँगता है—फिसलन, तेज धारा और चट्टानी किनारे
+            इस स्थल को सुंदर भी बनाते हैं और संवेदनशील भी।
+          </p>
+        </div>
+        <div class="grid gap-5 sm:grid-cols-2">
+          <div class="card">
+            <h3 class="m-0 text-xl">मुख्य आकर्षण</h3>
+            <p class="prose-muted mt-3 text-sm">
+              ऊपरी व्यू-पॉइंट, फैलती बहुधाराएँ, पानी की गूंज, पथरीला तल और बरसात के बाद की धुंधली फुहार।
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="m-0 text-xl">किसके लिए उपयुक्त</h3>
+            <p class="prose-muted mt-3 text-sm">
+              प्रकृति प्रेमी, फ़ोटोग्राफ़र, सप्ताहांत यात्री, छोटे समूह, परिवार और राँची से दिनभर की ट्रिप करने वाले। 
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="m-0 text-xl">सुरक्षा संकेत</h3>
+            <p class="prose-muted mt-3 text-sm">
+              पानी के बहुत निकट न जाएँ, फिसलन भरी सतह पर दौड़ें नहीं, बच्चों को अकेला न छोड़ें और मौसम खराब हो तो किनारों से दूर रहें। 
+            </p>
+          </div>
+          <div class="card">
+            <h3 class="m-0 text-xl">रुकने की सलाह</h3>
+            <p class="prose-muted mt-3 text-sm">
+              सामान्यत: 1.5 से 2.5 घंटे पर्याप्त रहते हैं; फ़ोटो, विश्राम और धीमे भ्रमण के साथ अधिक समय भी बिताया जा सकता है।
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plan" class="section pt-0">
+      <div class="container">
+        <div class="section-kicker">यात्रा योजना</div>
+        <h2 class="section-title mt-5">समय, पहुँच, शुल्क और व्यावहारिक जानकारी</h2>
+        <div class="mt-8 grid gap-5 lg:grid-cols-2 xl:grid-cols-3">
+          <article class="card">
+            <h3 class="m-0 text-xl">सर्वोत्तम समय</h3>
+            <p class="prose-muted mt-3 text-sm">
+              अक्टूबर से जनवरी सबसे लोकप्रिय समय है। बरसात के बाद जलप्रवाह मजबूत रहता है, जबकि सर्दियों में मौसम अपेक्षाकृत सुहावना होता है।
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="m-0 text-xl">खुलने का समय</h3>
+            <p class="prose-muted mt-3 text-sm">
+              प्रायः सुबह 8 बजे से शाम 6 बजे तक का समय संदर्भ के रूप में माना जा सकता है। स्थानीय या मौसमी बदलाव संभव हैं, इसलिए स्थल की ताज़ा सूचना देखें।
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="m-0 text-xl">प्रवेश शुल्क / खर्च</h3>
+            <p class="prose-muted mt-3 text-sm">
+              निश्चित दर यहाँ जानबूझकर नहीं दी गई है। यदि प्रवेश, वाहन या अन्य शुल्क लागू हों, तो स्थल पर प्रदर्शित दरों को अंतिम मानें। नकद रखना उपयोगी हो सकता है।
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="m-0 text-xl">पार्किंग</h3>
+            <p class="prose-muted mt-3 text-sm">
+              पहुँच मार्ग के निकट वाहन खड़ा करने की व्यवस्था मिल सकती है, परंतु भीड़ वाले दिनों में स्थान सीमित हो सकता है। सुबह जल्दी पहुँचना सुविधाजनक रहता है।
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="m-0 text-xl">यात्रा अवधि</h3>
+            <p class="prose-muted mt-3 text-sm">
+              राँची शहर से आने-जाने सहित आधे दिन से एक दिन की योजना सबसे व्यावहारिक रहती है। स्थल पर 1.5–2.5 घंटे का समय आराम से रखें।
+            </p>
+          </article>
+          <article class="card">
+            <h3 class="m-0 text-xl">क्या साथ रखें</h3>
+            <p class="prose-muted mt-3 text-sm">
+              पानी, हल्का नाश्ता, ग्रिप वाले जूते, बरसाती मौसम में अतिरिक्त कपड़े, मोबाइल के लिए वॉटर-सेफ पाउच और कचरा वापस ले जाने के लिए बैग।
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container grid gap-5 lg:grid-cols-2">
+        <article class="card">
+          <h2 class="text-2xl">विस्तृत परिवहन</h2>
+          <ul class="mt-4 space-y-4 pl-5 text-white/82">
+            <li><strong>सड़क मार्ग:</strong> राँची से तैमारा दिशा की ओर निजी कार या टैक्सी सबसे सरल विकल्प है।</li>
+            <li><strong>निकटतम हवाई अड्डा:</strong> बिरसा मुंडा एयरपोर्ट, राँची — उसके बाद सड़क मार्ग से यात्रा।</li>
+            <li><strong>निकटतम रेल संपर्क:</strong> राँची रेलवे स्टेशन — स्टेशन/शहर से टैक्सी या स्वयं-ड्राइव वाहन लें।</li>
+            <li><strong>बस / साझा वाहन:</strong> राँची से तैमारा / बुंडू दिशा में स्थानीय कनेक्टिविटी मिल सकती है, लेकिन अंतिम खंड के लिए निजी वाहन या रिज़र्व ऑटो/कैब अधिक सुविधाजनक है।</li>
+          </ul>
+        </article>
+        <article id="safety" class="card">
+          <h2 class="text-2xl">सुरक्षा व सावधानियाँ</h2>
+          <ul class="mt-4 space-y-4 pl-5 text-white/82">
+            <li>तेज़ धारा और फिसलन के कारण पानी में उतरना जोखिमपूर्ण हो सकता है।</li>
+            <li>चट्टानी किनारों पर सेल्फी लेते समय दूरी बनाए रखें।</li>
+            <li>बरसात या भारी प्रवाह के दौरान बैरियर, रस्सी और चेतावनी चिन्हों का कड़ाई से पालन करें।</li>
+            <li>बच्चों और बुज़ुर्गों के साथ धीमी गति से चलें; सीढ़ियाँ और उतराई सतर्कता माँगती हैं।</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="gallery" class="section pt-0">
+      <div class="container">
+        <div class="section-kicker">वास्तविक फ़ोटो</div>
+        <h2 class="section-title mt-5">दशम जलप्रपात की दृश्य गैलरी</h2>
+        <div class="mt-8 grid gap-5 md:grid-cols-2">
+          {photos.map((photo) => (
+            <figure class="photo-frame bg-white/5">
+              <img src={photo.src} alt={photo.alt} loading="lazy" />
+              <figcaption class="border-t border-white/10 px-5 py-4 text-sm text-white/76">{photo.caption}</figcaption>
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container grid gap-5 lg:grid-cols-2">
+        <article class="card">
+          <h2 class="text-2xl">आसपास क्या खाएँ?</h2>
+          <div class="mt-4 space-y-4 text-white/82">
+            {nearbyFood.map((item) => <p class="m-0 leading-8">{item}</p>)}
+          </div>
+        </article>
+        <article class="card">
+          <h2 class="text-2xl">आसपास घूमने योग्य स्थल</h2>
+          <div class="mt-4 grid gap-4">
+            {nearbyAttractions.map((item) => (
+              <div class="rounded-2xl border border-white/10 bg-white/4 p-4">
+                <h3 class="m-0 text-lg">{item.name}</h3>
+                <p class="prose-muted mt-2 text-sm">{item.detail}</p>
+              </div>
+            ))}
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="map" class="section pt-0">
+      <div class="container">
+        <div class="section-kicker">स्थान</div>
+        <h2 class="section-title mt-5">मानचित्र और पहुँच का अंतिम बिंदु</h2>
+        <div class="mt-8 overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 shadow-2xl">
+          <iframe
+            title="दशम जलप्रपात का मानचित्र"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6525.371072951572!2d85.46410676270204!3d23.143547579001932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5056e67b9e4a3%3A0x25570e4d2a5836ee!2sDassam%20Falls!5e1!3m2!1shi!2sin!4v1789091869210!5m2!1shi!2sin"
+            width="100%"
+            height="480"
+            style="border:0"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="strict-origin-when-cross-origin"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq" class="section pt-0 faq">
+      <div class="container">
+        <div class="section-kicker">FAQ</div>
+        <h2 class="section-title mt-5">सामान्य प्रश्न</h2>
+        <div class="mt-8 grid gap-4">
+          {faq.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p class="mt-4 mb-1 leading-8 text-white/78">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-10">
+    <div class="container flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div>
+        <p class="m-0 text-lg font-semibold">दशम जलप्रपात</p>
+        <p class="footer-note mt-2">यह एक स्वतंत्र, गैर-आधिकारिक पर्यटन सूचना वेबसाइट है; अंतिम स्थल-निर्देश, समय और शुल्क के लिए स्थानीय / आधिकारिक सूचना को प्राथमिकता दें।</p>
+      </div>
+      <a class="badge-link" href="https://maps.app.goo.gl/E5Qsa6k4WQFZrChz6" target="_blank" rel="noreferrer">Google Maps खोलें ↗</a>
+    </div>
+  </footer>
+</BaseLayout>
