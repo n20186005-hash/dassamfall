@@ -21,16 +21,14 @@
 `astro.config.mjs` में:
 
 ```js
-const SITE = process.env.SITE_URL?.trim() || '';
+const SITE = process.env.SITE_URL?.trim() || 'https://dassamfall.com';
 ```
 
 यही एकमात्र source of truth है।
 
-- `SITE_URL` खाली होने पर build रुकना नहीं चाहिए
-- `site` फ़ील्ड `undefined` रहती है
-- canonical / absolute Open Graph URL omit हो जाते हैं
-- sitemap integration enable नहीं होती
-- domain मिलने पर केवल `SITE_URL` भरकर पुनः build करें
+- डिफ़ॉल्ट `https://dassamfall.com` लागू होता है, इसलिए canonical / absolute Open Graph URL / sitemap हमेशा बनते हैं
+- दूसरा डोमेन चाहिए तो `SITE_URL=https://...` भरकर override करें (खाली रहने पर भी सेफ़ डिफ़ॉल्ट लागू होगा)
+- `public/robots.txt` `sitemap-index.xml` को ही point करता है
 
 ## फ़ोटो
 

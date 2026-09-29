@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { ATTRACTION } from '../data/site';
 
 const photos = [
   {
@@ -26,7 +27,7 @@ const photos = [
 
 const facts = [
   ['रेटिंग', '4.5 / 5'],
-  ['समीक्षाएँ', '15,959'],
+  ['समीक्षाएँ', ATTRACTION.reviewCount.toLocaleString('en-IN')],
   ['ऊँचाई', 'लगभग 144 फ़ीट'],
   ['नदी', 'काँची नदी'],
 ];
@@ -77,6 +78,14 @@ const faq = [
     q: 'प्रवेश शुल्क और पार्किंग के बारे में पहले से क्या जानना चाहिए?',
     a: 'शुल्क या वाहन-शुल्क समय-समय पर बदल सकते हैं। इस पृष्ठ पर कोई निश्चित राशि जानबूझकर नहीं दी गई है; स्थल पर प्रदर्शित सूचना ही अंतिम मानी जाए।',
   },
+  {
+    q: 'राँची से दशम जलप्रपात की दूरी कितनी है?',
+    a: 'राँची शहर से दशम जलप्रपात लगभग 35–45 किमी दूर है। मार्ग (तैमारा / बुंडू दिशा) और यातायात के अनुसार सफ़र में 1 से 1.5 घंटे लग सकते हैं। सुबह जल्दी निकलने से भीड़ और पार्किंग की समस्या कम रहती है।',
+  },
+  {
+    q: 'दशम जलप्रपात का दर्शन / खुलने का समय क्या है?',
+    a: 'सामान्यत: सुबह 8 बजे से शाम 6 बजे तक का समय संदर्भ के रूप में रहता है। स्थानीय या मौसमी बदलाव संभव हैं, इसलिए यात्रा से पहले स्थल की ताज़ा सूचना देखें।',
+  },
 ];
 
 const attractionJsonLd = {
@@ -119,11 +128,12 @@ const attractionJsonLd = {
   ],
   aggregateRating: {
     '@type': 'AggregateRating',
-    ratingValue: '4.5',
-    reviewCount: '15959',
+    ratingValue: String(ATTRACTION.rating),
+    reviewCount: String(ATTRACTION.reviewCount),
     bestRating: '5',
     worstRating: '1',
   },
+  sameAs: [ATTRACTION.mapsUrl],
 };
 
 const faqJsonLd = {
@@ -139,8 +149,8 @@ const faqJsonLd = {
   })),
 };
 
-const pageTitle = 'दशम जलप्रपात — राँची के पास झारखण्ड का शानदार जलप्रपात';
-const pageDescription = 'दशम जलप्रपात की यात्रा योजना: मुख्य जानकारी, पहुँच मार्ग, देखने का सर्वोत्तम समय, सुरक्षा, पार्किंग, पास के आकर्षण और वास्तविक फोटो।';
+const pageTitle = 'दशम जलप्रपात (Dassam Falls) राँची: टाइमिंग, प्रवेश शुल्क, दूरी और यात्रा गाइड';
+const pageDescription = 'दशम जलप्रपात (Dassam Falls) राँची, झारखण्ड के पास — टाइमिंग, प्रवेश शुल्क, राँची से दूरी, सुरक्षा, सर्वोत्तम मौसम और पास के आकर्षण के साथ पूरी यात्रा गाइड।';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} jsonLd={[attractionJsonLd, faqJsonLd]}>
@@ -394,7 +404,7 @@ const pageDescription = 'दशम जलप्रपात की यात्�
         <p class="m-0 text-lg font-semibold">दशम जलप्रपात</p>
         <p class="footer-note mt-2">यह एक स्वतंत्र, गैर-आधिकारिक पर्यटन सूचना वेबसाइट है; अंतिम स्थल-निर्देश, समय और शुल्क के लिए स्थानीय / आधिकारिक सूचना को प्राथमिकता दें।</p>
       </div>
-      <a class="badge-link" href="https://maps.app.goo.gl/E5Qsa6k4WQFZrChz6" target="_blank" rel="noreferrer">Google Maps खोलें ↗</a>
+      <a class="badge-link" href={ATTRACTION.mapsUrl} target="_blank" rel="noreferrer">Google Maps खोलें ↗</a>
     </div>
   </footer>
 </BaseLayout>

@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import CookieConsent from '../components/CookieConsent.astro';
+import { SITE_NAME } from '../data/site';
 
 interface Props {
   title: string;
@@ -22,11 +23,14 @@ const ogImage = Astro.site ? new URL(image, Astro.site).toString() : image;
     <title>{title}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
+    <meta name="theme-color" content="#0f1714" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     {canonical && <meta property="og:url" content={canonical} />}
     <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="hi_IN" />
+    <meta property="og:site_name" content={SITE_NAME} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
