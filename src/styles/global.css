@@ -193,3 +193,11 @@ button {
   color: rgba(238, 247, 242, 0.72);
   font-size: .95rem;
 }
+
+[id] { scroll-margin-top: 11rem; }
+.skip-link { position:fixed;top:-8rem;left:1rem;z-index:100;background:#fff;color:#111;padding:.8rem; }
+.skip-link:focus { top:1rem; }
+a:focus-visible,button:focus-visible,summary:focus-visible {outline:3px solid #9ddbff;outline-offset:4px;}
+.cookie-panel { max-height:60vh;overflow:auto; }
+body:has(.cookie-banner:not([hidden])) { padding-bottom:18rem; }
+@media (prefers-reduced-motion:reduce) {html {scroll-behavior:auto;}* {transition:none!important;}}

@@ -10,7 +10,7 @@
 - @tailwindcss/vite **4.3.3**
 - TypeScript **6.0.3**
 - @astrojs/check **0.9.10**
-- Wrangler **4.130.0**
+- Wrangler **4.131.0**
 - pnpm **10.11.1**
 - Node.js **24.21.0**
 
@@ -24,7 +24,7 @@
 const SITE = process.env.SITE_URL?.trim() || 'https://dassamfall.com';
 ```
 
-यही एकमात्र source of truth है।
+यह canonical और metadata का source है; Worker में canonical host भी इससे मेल खाना चाहिए।
 
 - डिफ़ॉल्ट `https://dassamfall.com` लागू होता है, इसलिए canonical / absolute Open Graph URL / sitemap हमेशा बनते हैं
 - दूसरा डोमेन चाहिए तो `SITE_URL=https://...` भरकर override करें (खाली रहने पर भी सेफ़ डिफ़ॉल्ट लागू होगा)
@@ -32,7 +32,7 @@ const SITE = process.env.SITE_URL?.trim() || 'https://dassamfall.com';
 
 ## फ़ोटो
 
-`public/images/` में 4 वास्तविक Dassam Falls फोटो शामिल हैं। इन्हें Wikimedia Commons के सार्वजनिक फ़ाइल पृष्ठों से प्राप्त स्टेज्ड इमेज के आधार पर प्रोजेक्ट में रखा गया है। स्रोत और श्रेय `ATTRIBUTIONS.md` में हैं।
+`public/images/` में 3 वास्तविक Dassam Falls फोटो शामिल हैं। इन्हें Wikimedia Commons के सार्वजनिक फ़ाइल पृष्ठों से प्राप्त स्टेज्ड इमेज के आधार पर प्रोजेक्ट में रखा गया है। स्रोत और श्रेय `ATTRIBUTIONS.md` में हैं।
 
 ## स्थानीय विकास
 
@@ -55,7 +55,8 @@ pnpm build
 pnpm deploy
 ```
 
-## महत्वपूर्ण टिप्पणी
+## सत्यापन और स्रोत
 
-इस रनिंग environment में registry/network resolution उपलब्ध नहीं थी, इसलिए `pnpm install --frozen-lockfile` और वास्तविक `pnpm-lock.yaml` जनरेशन का स्वचालित सत्यापन यहाँ निष्पादित नहीं किया जा सका।
-स्रोत कोड, कॉन्फ़िगरेशन, स्थानीय इमेज, लोगो, favicon, JSON-LD, FAQ और Cloudflare/Wrangler सेटअप तैयार हैं; network-enabled मशीन पर install/build चलाकर lockfile regenerate/verify करें।
+मूल fixed dependencies और frozen lockfile संरक्षित हैं। स्थानीय install/check/build/dry-run से स्थानीय candidate तैयार होता है, production release का प्रमाण नहीं। पुराने generation-environment दावे अब लागू नहीं हैं। Native static ASSETS wrapper HTTP/www canonical redirect और वास्तविक noindex404 संभालता है; SSR adapter सक्रिय नहीं है। Cloudflare project `dassamfall` है; domain bindings नहीं बदले गए।
+
+पृष्ठ पर स्रोतों, फोटो लाइसेंस, dated Maps snapshot और operational uncertainty का उल्लेख है। Google Analytics consent UI बरकरार है; Maps/Cloudflare अलग third-party processing कर सकते हैं। निजी performance reports public repository का हिस्सा नहीं हैं।

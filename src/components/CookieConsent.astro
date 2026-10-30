@@ -42,27 +42,40 @@ const gaId = 'G-HXM22WWPKP';
       gtag('config', gaId, { anonymize_ip: true });
     };
 
-    const stored = localStorage.getItem(storageKey);
-    if (stored === 'accepted') {
-      injectGa();
-      return;
-    }
-
-    if (stored !== 'rejected') {
+    const read = () => { try { return localStorage.getItem(storageKey); } catch { return null; } };
+    const save = (value) => { try { localStorage.setItem(storageKey, value); } catch {} };
+    const disable = () => {
+      window['ga-disable-' + gaId] = true;
+      if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'denied' });
+      document.cookie.split(';').forEach((entry) => {
+        const name = entry.trim().split('=')[0];
+        if (!/^_ga(?:_|$)/.test(name)) return;
+        for (const domain of ['', location.hostname, '.' + location.hostname.replace(/^www\./, '')]) {
+          document.cookie = name + '=; Max-Age=0; path=/' + (domain ? '; domain=' + domain : '');
+        }
+      });
+    };
+    const stored = read();
+    if (stored === 'accepted') injectGa();
+    else if (stored !== 'rejected') banner.hidden = false;
+    document.querySelectorAll('[data-cookie-settings]').forEach((button) => button.addEventListener('click', () => {
       banner.hidden = false;
-    }
-
+      banner.querySelector('button')?.focus();
+    }));
     banner.querySelectorAll('[data-cookie-action]').forEach((button) => {
       button.addEventListener('click', () => {
-        const action = button.getAttribute('data-cookie-action');
-        if (action === 'accept') {
-          localStorage.setItem(storageKey, 'accepted');
+        const accept = button.getAttribute('data-cookie-action') === 'accept';
+        save(accept ? 'accepted' : 'rejected');
+        if (accept) {
+          window['ga-disable-' + gaId] = false;
+          if (window.gtag) window.gtag('consent', 'update', { analytics_storage: 'granted' });
           injectGa();
-        } else {
-          localStorage.setItem(storageKey, 'rejected');
-        }
+        } else disable();
         banner.hidden = true;
       });
+    });
+    window.addEventListener('storage', (event) => {
+      if (event.key === storageKey && event.newValue !== 'accepted') { disable(); banner.hidden = event.newValue === 'rejected'; }
     });
   })();
 </script>

@@ -1,5 +1,5 @@
 // Central source of truth for Dassam Falls attraction facts and SEO identity.
-// Values synced from the Google Maps listing (16,063 reviews / 4.5, 2026-09).
+// Dated third-party Maps snapshot checked 29 October 2026; not guide-collected reviews.
 
 // SEO site-name format: 景点名称 + 城市 + 旅游指南
 // => "दशम जलप्रपात राँची — यात्रा मार्गदर्शिका" (Dassam Falls + Ranchi + Travel Guide)
@@ -13,7 +13,7 @@ export const ATTRACTION = {
   name: 'Dassam Falls',
   alternateName: ['दशम जलप्रपात', 'दशम फॉल्स', 'Dassam Ghagh'],
   rating: 4.5,
-  reviewCount: 16063,
+  reviewCount: 16158,
   heightFeet: 144,
   river: 'Kanchi River',
   address: {
@@ -24,15 +24,10 @@ export const ATTRACTION = {
     country: 'IN',
   },
   geo: {
-    latitude: 23.14593,
-    longitude: 85.467127,
+    latitude: 23.1462515,
+    longitude: 85.4672203,
   },
   plusCode: '4FW8+GV5',
   mapsUrl: 'https://maps.app.goo.gl/E5Qsa6k4WQFZrChz6',
-  // Reference opening hours — local/seasonal variation possible.
-  openingHours: {
-    opens: '08:00',
-    closes: '18:00',
-  },
-  distanceFromRanchiKm: '35–45',
+  distanceFromRanchiKm: '34–45',
 } as const;

@@ -4,30 +4,28 @@ import { ATTRACTION } from '../data/site';
 
 const photos = [
   {
-    src: '/images/dassam-falls-01.jpg',
-    alt: 'दशम जलप्रपात का ऊँचाई से दिखता शक्तिशाली दृश्य',
-    caption: 'बरसात और बाद के महीनों में बहाव सबसे प्रभावशाली दिखता है।',
-  },
-  {
     src: '/images/dassam-falls-02.jpg',
     alt: 'घने हरियाले और चट्टानी तल के बीच फैला दशम जलप्रपात',
-    caption: 'चट्टानी परतों पर फैलती बहुधाराएँ इस स्थल की पहचान हैं।',
+    caption: 'संदर्भ फ़ोटो, 7 अक्टूबर 2024; वर्तमान बहाव या प्रवेश की स्थिति नहीं।',
+    author: 'Kingshuk Mondal', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Dassam_Falls,_Jharkhand,_India_02.jpg', width: 1000, height: 750,
   },
   {
     src: '/images/dassam-falls-03.jpg',
     alt: 'जलप्रपात का विस्तृत फ्रंट व्यू',
-    caption: 'ऊपरी व्यू-पॉइंट और नीचे के दर्शन-बिंदु दोनों अलग अनुभव देते हैं।',
+    caption: 'संदर्भ फ़ोटो, 7 अक्टूबर 2024; किसी निचले रास्ते के खुले या सुरक्षित होने की पुष्टि नहीं।',
+    author: 'Kingshuk Mondal', license: 'CC BY 4.0', licenseUrl: 'https://creativecommons.org/licenses/by/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Dassam_Falls,_Jharkhand,_India_03.jpg', width: 1000, height: 750,
   },
   {
     src: '/images/dassam-falls-04.jpg',
     alt: 'चट्टानों के बीच नीचे उतरती जलधारा और पर्यटक',
-    caption: 'फिसलन के कारण किनारों पर विशेष सावधानी आवश्यक है।',
+    caption: 'संदर्भ फ़ोटो, 11 जून 2016; पानी के पास दिख रहे लोगों का अनुसरण न करें। पानी में न उतरें।',
+    author: 'TribhuwanKumar', license: 'CC BY-SA 4.0', licenseUrl: 'https://creativecommons.org/licenses/by-sa/4.0/', source: 'https://commons.wikimedia.org/wiki/File:Dasam_fall.jpg', width: 1000, height: 750,
   },
 ];
 
 const facts = [
-  ['रेटिंग', '4.5 / 5'],
-  ['समीक्षाएँ', ATTRACTION.reviewCount.toLocaleString('en-IN')],
+  ['Google Maps रेटिंग', '4.5 / 5'],
+  ['तृतीय-पक्ष समीक्षाएँ', ATTRACTION.reviewCount.toLocaleString('en-IN')],
   ['ऊँचाई', 'लगभग 144 फ़ीट'],
   ['नदी', 'काँची नदी'],
 ];
@@ -39,36 +37,22 @@ const nearbyFood = [
 ];
 
 const nearbyAttractions = [
-  {
-    name: 'हुंडरू फॉल्स',
-    detail: 'राँची क्षेत्र का प्रसिद्ध जलप्रपात; जलप्रपात-दिवस यात्रा के लिए लोकप्रिय संयोजन।',
-  },
-  {
-    name: 'जोन्हा फॉल्स',
-    detail: 'हरा-भरा, शांत वातावरण और अलग घाटी अनुभव वाला जलप्रपात।',
-  },
-  {
-    name: 'सीता फॉल',
-    detail: 'छोटा पर प्राकृतिक, शांत परिवेश के कारण फ़ोटो और छोटी यात्रा के लिए उपयुक्त।',
-  },
-  {
-    name: 'गेटलसुद डैम',
-    detail: 'राँची के आसपास जलाशय दृश्य और शाम के ठहराव के लिए उपयुक्त विकल्प।',
-  },
+  {name: 'अलग यात्रा की योजना', detail: 'हुंडरू या जोन्हा जैसे दूसरे जलप्रपात इस गाइड के पैदल-पड़ोस नहीं हैं। प्रत्येक का रास्ता, बंदी, मौसम और वापसी का समय अलग से जाँचें; एक दिन में सबको जोड़ने की गारंटी नहीं है।'},
 ];
 
 const faq = [
+  {q:'दशम जलप्रपात किस नदी पर है?', a:'यह काँची (Kanchi) नदी पर है। झारखण्ड पर्यटन इसे सुवर्णरेखा की सहायक नदी बताता है। Incredible India काँची नदी, लगभग 44 मीटर ऊँचाई और पानी में न उतरने की चेतावनी का स्रोत है। राँची जिला पृष्ठ में नदी का नाम Kachni लिखा है; यह उसी दशम जलप्रपात का विवरण है।'},
   {
     q: 'दशम जलप्रपात जाने का सबसे अच्छा समय कौन-सा है?',
-    a: 'अक्टूबर से जनवरी का समय सबसे लोकप्रिय माना जाता है। बरसात के बाद जलप्रवाह प्रबल रहता है, हरियाली घनी होती है और दृश्य सबसे आकर्षक दिखता है।',
+    a: 'झारखण्ड पर्यटन अक्टूबर–जनवरी सुझाता है। Incredible India वर्षा-ऋतु के अधिक बहाव और अक्टूबर–नवंबर के विकल्प का वर्णन करता है। ये मौसमी सुझाव हैं, सुरक्षा या खुलने की गारंटी नहीं; मौसम और स्थानीय प्रतिबंध पहले जाँचें।',
   },
   {
     q: 'क्या यहाँ स्नान या पानी में उतरना सुरक्षित है?',
-    a: 'नहीं। तेज धारा, फिसलन भरी चट्टानें और गहराई वाले हिस्से जोखिम पैदा कर सकते हैं। स्थल पर लगे सुरक्षा निर्देशों का पालन करें और पानी के बहुत निकट न जाएँ।',
+    a: 'नहीं। Incredible India तेज धारा और असमान चट्टानों के कारण पानी में उतरने या तैरने को असुरक्षित बताता है। पानी में न उतरें, स्नान न करें और न तैरें; बैरियर पार न करें।',
   },
   {
     q: 'क्या परिवार और बच्चों के साथ जाया जा सकता है?',
-    a: 'हाँ, लेकिन बच्चों को हमेशा साथ रखें। चट्टानों, सीढ़ियों और व्यू-पॉइंट क्षेत्रों में विशेष ध्यान रखें।',
+    a: 'पहले प्रवेश और अनुमत रास्तों की स्थिति जाँचें। बच्चों को साथ रखें और बैरियर से दूर रुकें। सीढ़ियाँ, फिसलन और उतराई सभी के लिए उपयुक्त नहीं हो सकतीं; समतल या बाधारहित मार्ग की पुष्टि नहीं है।',
   },
   {
     q: 'वहाँ पहुँचने का सबसे सुविधाजनक तरीका क्या है?',
@@ -80,17 +64,18 @@ const faq = [
   },
   {
     q: 'राँची से दशम जलप्रपात की दूरी कितनी है?',
-    a: 'राँची शहर से दशम जलप्रपात लगभग 35–45 किमी दूर है। मार्ग (तैमारा / बुंडू दिशा) और यातायात के अनुसार सफ़र में 1 से 1.5 घंटे लग सकते हैं। सुबह जल्दी निकलने से भीड़ और पार्किंग की समस्या कम रहती है।',
+    a: 'राँची जिला पृष्ठ 34 किमी और झारखण्ड पर्यटन लगभग 45 किमी बताता है; प्रारंभिक बिंदु व मार्ग अलग हो सकते हैं। चुने हुए प्रस्थान-बिंदु से वर्तमान सड़क मार्ग देखें; तय यात्रा-समय या उपलब्ध परिवहन की गारंटी नहीं है।',
   },
   {
     q: 'दशम जलप्रपात का दर्शन / खुलने का समय क्या है?',
-    a: 'सामान्यत: सुबह 8 बजे से शाम 6 बजे तक का समय संदर्भ के रूप में रहता है। स्थानीय या मौसमी बदलाव संभव हैं, इसलिए यात्रा से पहले स्थल की ताज़ा सूचना देखें।',
+    a: '29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था; यह पूरा साप्ताहिक समय-सारिणी या अभी प्रवेश की पुष्टि नहीं है। वर्तमान आधिकारिक शुल्क, अंतिम प्रवेश और बंदी सूचना सत्यापित नहीं मिली; यात्रा से पहले स्थानीय प्रबंधन और जिला सूचना देखें।',
   },
 ];
 
 const attractionJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'TouristAttraction',
+  '@id': `${Astro.site}#falls`,
   name: 'Dassam Falls',
   alternateName: ['दशम जलप्रपात', 'दशम फॉल्स', 'Dassam Ghagh'],
   description: 'झारखण्ड के राँची ज़िले के पास स्थित प्राकृतिक जलप्रपात, जो काँची नदी पर लगभग 144 फ़ीट की ऊँचाई से गिरता है।',
@@ -107,31 +92,8 @@ const attractionJsonLd = {
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 23.14593,
-    longitude: 85.467127,
-  },
-  openingHoursSpecification: [
-    {
-      '@type': 'OpeningHoursSpecification',
-      dayOfWeek: [
-        'https://schema.org/Monday',
-        'https://schema.org/Tuesday',
-        'https://schema.org/Wednesday',
-        'https://schema.org/Thursday',
-        'https://schema.org/Friday',
-        'https://schema.org/Saturday',
-        'https://schema.org/Sunday',
-      ],
-      opens: '08:00',
-      closes: '18:00',
-    },
-  ],
-  aggregateRating: {
-    '@type': 'AggregateRating',
-    ratingValue: String(ATTRACTION.rating),
-    reviewCount: String(ATTRACTION.reviewCount),
-    bestRating: '5',
-    worstRating: '1',
+    latitude: ATTRACTION.geo.latitude,
+    longitude: ATTRACTION.geo.longitude,
   },
   sameAs: [ATTRACTION.mapsUrl],
 };
@@ -139,6 +101,7 @@ const attractionJsonLd = {
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
+  '@id': `${Astro.site}#faq`,
   mainEntity: faq.map((item) => ({
     '@type': 'Question',
     name: item.q,
@@ -149,17 +112,18 @@ const faqJsonLd = {
   })),
 };
 
-const pageTitle = 'दशम जलप्रपात (Dassam Falls) राँची: टाइमिंग, प्रवेश शुल्क, दूरी और यात्रा गाइड';
-const pageDescription = 'दशम जलप्रपात (Dassam Falls) राँची, झारखण्ड के पास — टाइमिंग, प्रवेश शुल्क, राँची से दूरी, सुरक्षा, सर्वोत्तम मौसम और पास के आकर्षण के साथ पूरी यात्रा गाइड।';
+const pageTitle = 'दशम जलप्रपात किस नदी पर है? Dassam Falls राँची यात्रा गाइड';
+const pageDescription = 'काँची नदी पर दशम जलप्रपात: स्थान, नदी, मौसम और सुरक्षित दर्शन की जानकारी। समय, शुल्क और बंदी की पुष्टि के लिए स्रोत व जाँच-सुझाव।';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} jsonLd={[attractionJsonLd, faqJsonLd]}>
+  <a class="skip-link" href="#top">मुख्य सामग्री पर जाएँ</a>
   <header class="sticky top-0 z-40 border-b border-white/10 bg-black/25 backdrop-blur-xl">
-    <div class="container flex items-center justify-between gap-6 py-4">
+    <div class="container flex flex-col items-start justify-between gap-3 py-4 md:flex-row md:items-center">
       <a class="flex items-center gap-3" href="#top">
         <img src="/logo.svg" alt="दशम जलप्रपात लोगो" class="h-10 w-auto" />
       </a>
-      <nav class="hidden gap-5 text-sm text-white/80 md:flex">
+      <nav class="flex flex-wrap gap-4 text-sm text-white/80">
         <a href="#overview">परिचय</a>
         <a href="#plan">यात्रा योजना</a>
         <a href="#gallery">गैलरी</a>
@@ -172,7 +136,7 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
   <main id="top">
     <section class="relative overflow-hidden">
       <div class="absolute inset-0">
-        <img src={photos[1].src} alt={photos[1].alt} class="h-full w-full object-cover" />
+        <img src={photos[0].src} alt="" width="1000" height="750" fetchpriority="high" class="h-full w-full object-cover" />
         <div class="hero-overlay absolute inset-0"></div>
       </div>
 
@@ -186,6 +150,8 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
             काँची नदी की शक्तिशाली धाराओं से बनता यह प्रसिद्ध जलप्रपात राँची के पास प्रकृति,
             चट्टानी भू-दृश्य और बरसात के बाद के जोशीले जलप्रवाह का अद्भुत मेल प्रस्तुत करता है।
           </p>
+          <p class="mt-4 rounded-xl border border-amber-200/40 bg-black/50 p-3 font-semibold">पानी में न उतरें, स्नान न करें और न तैरें। केवल खुले, अनुमत रास्तों पर रहें; मौसम या बंदी हो तो यात्रा स्थगित करें।</p>
+          <p class="mt-3 text-sm text-white/85">© Kingshuk Mondal, <a class="underline" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> via <a class="underline" href={photos[0].source}>Wikimedia Commons</a> · आकार घटाया गया; प्रस्तुति में क्रॉप। संदर्भ फ़ोटो, वर्तमान स्थिति नहीं।</p>
           <div class="mt-8 flex flex-wrap gap-3">
             <a class="badge-link" href="#map">📍 मानचित्र देखें</a>
             <a class="badge-link" href="#plan">🧭 यात्रा योजना</a>
@@ -194,6 +160,7 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
         </div>
 
         <aside class="glass rounded-[1.8rem] p-5 md:p-6">
+          <p class="mb-4 text-sm">Maps स्नैपशॉट: 29 अक्टूबर 2026। समीक्षाएँ इस गाइड ने एकत्र नहीं कीं।</p>
           <div class="grid grid-cols-2 gap-4">
             {facts.map(([label, value]) => (
               <div class="card">
@@ -206,7 +173,7 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
             <p class="m-0 text-sm uppercase tracking-[0.18em] text-[#f4deb0]">पता</p>
             <p class="mt-3 text-base leading-7 text-white/85">4FW8+GV5, Tarub, Jharkhand 835204, India</p>
             <p class="mt-3 text-sm leading-7 text-white/72">
-              राँची से लगभग 35–45 किमी, प्रारंभिक बिंदु और चुने गए मार्ग के अनुसार दूरी बदल सकती है।
+              जिला स्रोत 34 किमी, राज्य पर्यटन लगभग 45 किमी बताता है; प्रस्थान-बिंदु और मार्ग की पुष्टि करें।
             </p>
           </div>
         </aside>
@@ -224,8 +191,7 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
             यह राँची से एक दिन की यात्रा, परिवार के साथ प्रकृति-भ्रमण और फ़ोटोग्राफ़ी के लिए पसंदीदा स्थल है।
           </p>
           <p class="prose-muted mt-4">
-            जलप्रपात की ऊँचाई लगभग 144 फ़ीट मानी जाती है। बरसात के बाद इसका बहाव सबसे शक्तिशाली और दृश्य सबसे
-            जीवंत हो जाता है। फिर भी यही मौसम अतिरिक्त सावधानी भी माँगता है—फिसलन, तेज धारा और चट्टानी किनारे
+            जलप्रपात की ऊँचाई लगभग 144 फ़ीट मानी जाती है। बहाव मौसम और वर्षा के अनुसार बदलता है। फिर भी यही मौसम अतिरिक्त सावधानी भी माँगता है—फिसलन, तेज धारा और चट्टानी किनारे
             इस स्थल को सुंदर भी बनाते हैं और संवेदनशील भी।
           </p>
         </div>
@@ -233,25 +199,25 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
           <div class="card">
             <h3 class="m-0 text-xl">मुख्य आकर्षण</h3>
             <p class="prose-muted mt-3 text-sm">
-              ऊपरी व्यू-पॉइंट, फैलती बहुधाराएँ, पानी की गूंज, पथरीला तल और बरसात के बाद की धुंधली फुहार।
+              काँची नदी की धाराएँ और चट्टानी भू-दृश्य। केवल खुले अनुमत स्थान से देखें; किसी खास व्यू-पॉइंट के चालू होने का दावा नहीं है।
             </p>
           </div>
           <div class="card">
-            <h3 class="m-0 text-xl">किसके लिए उपयुक्त</h3>
+            <h3 class="m-0 text-xl">दशम जलप्रपात किस नदी पर है?</h3>
             <p class="prose-muted mt-3 text-sm">
-              प्रकृति प्रेमी, फ़ोटोग्राफ़र, सप्ताहांत यात्री, छोटे समूह, परिवार और राँची से दिनभर की ट्रिप करने वाले। 
+              काँची (Kanchi) नदी पर। झारखण्ड पर्यटन इसे सुवर्णरेखा की सहायक नदी बताता है; जिला स्रोत में Kachni वर्तनी है।
             </p>
           </div>
           <div class="card">
             <h3 class="m-0 text-xl">सुरक्षा संकेत</h3>
             <p class="prose-muted mt-3 text-sm">
-              पानी के बहुत निकट न जाएँ, फिसलन भरी सतह पर दौड़ें नहीं, बच्चों को अकेला न छोड़ें और मौसम खराब हो तो किनारों से दूर रहें। 
+              पानी के बहुत निकट न जाएँ, फिसलन भरी सतह पर दौड़ें नहीं, बच्चों को अकेला न छोड़ें और मौसम खराब हो तो किनारों से दूर रहें।
             </p>
           </div>
           <div class="card">
             <h3 class="m-0 text-xl">रुकने की सलाह</h3>
             <p class="prose-muted mt-3 text-sm">
-              सामान्यत: 1.5 से 2.5 घंटे पर्याप्त रहते हैं; फ़ोटो, विश्राम और धीमे भ्रमण के साथ अधिक समय भी बिताया जा सकता है।
+              संपादकीय योजना के लिए 1.5–2.5 घंटे रख सकते हैं; यह आधिकारिक अवधि नहीं। मौसम, अनुमति और अपनी गतिशीलता के अनुसार समय बदलें।
             </p>
           </div>
         </div>
@@ -266,13 +232,13 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
           <article class="card">
             <h3 class="m-0 text-xl">सर्वोत्तम समय</h3>
             <p class="prose-muted mt-3 text-sm">
-              अक्टूबर से जनवरी सबसे लोकप्रिय समय है। बरसात के बाद जलप्रवाह मजबूत रहता है, जबकि सर्दियों में मौसम अपेक्षाकृत सुहावना होता है।
+              राज्य पर्यटन अक्टूबर–जनवरी सुझाता है; राष्ट्रीय पर्यटन पृष्ठ वर्षा-ऋतु व अक्टूबर–नवंबर का भी उल्लेख करता है। तेज बहाव देखने के लिए जोखिम न लें; मौसम और बंदी सूचना को प्राथमिकता दें।
             </p>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">खुलने का समय</h3>
             <p class="prose-muted mt-3 text-sm">
-              प्रायः सुबह 8 बजे से शाम 6 बजे तक का समय संदर्भ के रूप में माना जा सकता है। स्थानीय या मौसमी बदलाव संभव हैं, इसलिए स्थल की ताज़ा सूचना देखें।
+              29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था। पूरा आधिकारिक साप्ताहिक समय या अंतिम प्रवेश सत्यापित नहीं है; यह आज प्रवेश की गारंटी नहीं। स्थानीय प्रबंधन से पुष्टि करें।
             </p>
           </article>
           <article class="card">
@@ -284,13 +250,13 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
           <article class="card">
             <h3 class="m-0 text-xl">पार्किंग</h3>
             <p class="prose-muted mt-3 text-sm">
-              पहुँच मार्ग के निकट वाहन खड़ा करने की व्यवस्था मिल सकती है, परंतु भीड़ वाले दिनों में स्थान सीमित हो सकता है। सुबह जल्दी पहुँचना सुविधाजनक रहता है।
+              अधिकृत पार्किंग, शुल्क, समय और उपलब्ध स्थान की पुष्टि करें। इस गाइड ने वर्तमान पार्किंग क्षमता या किसी ऑपरेटर को सत्यापित नहीं किया है।
             </p>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">यात्रा अवधि</h3>
             <p class="prose-muted mt-3 text-sm">
-              राँची शहर से आने-जाने सहित आधे दिन से एक दिन की योजना सबसे व्यावहारिक रहती है। स्थल पर 1.5–2.5 घंटे का समय आराम से रखें।
+              संपादकीय सुझाव: रास्ते और वापसी सहित समय का अतिरिक्त अंतर रखें। 1.5–2.5 घंटे केवल योजना का विकल्प है, आधिकारिक अवधि या खुले रास्तों की गारंटी नहीं।
             </p>
           </article>
           <article class="card">
@@ -317,8 +283,8 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
         <article id="safety" class="card">
           <h2 class="text-2xl">सुरक्षा व सावधानियाँ</h2>
           <ul class="mt-4 space-y-4 pl-5 text-white/82">
-            <li>तेज़ धारा और फिसलन के कारण पानी में उतरना जोखिमपूर्ण हो सकता है।</li>
-            <li>चट्टानी किनारों पर सेल्फी लेते समय दूरी बनाए रखें।</li>
+            <li>पानी में न उतरें, स्नान न करें और न तैरें। Incredible India तेज धारा व असमान चट्टानों को इसका कारण बताता है।</li>
+            <li>बैरियर पार करके या चट्टानी किनारे पर सेल्फी न लें; केवल अनुमत खुले रास्तों पर रहें।</li>
             <li>बरसात या भारी प्रवाह के दौरान बैरियर, रस्सी और चेतावनी चिन्हों का कड़ाई से पालन करें।</li>
             <li>बच्चों और बुज़ुर्गों के साथ धीमी गति से चलें; सीढ़ियाँ और उतराई सतर्कता माँगती हैं।</li>
           </ul>
@@ -333,8 +299,8 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
         <div class="mt-8 grid gap-5 md:grid-cols-2">
           {photos.map((photo) => (
             <figure class="photo-frame bg-white/5">
-              <img src={photo.src} alt={photo.alt} loading="lazy" />
-              <figcaption class="border-t border-white/10 px-5 py-4 text-sm text-white/76">{photo.caption}</figcaption>
+              <img src={photo.src} alt={photo.alt} width={photo.width} height={photo.height} loading="lazy" />
+              <figcaption class="border-t border-white/10 px-5 py-4 text-sm text-white/76">{photo.caption}<br />© {photo.author}, <a class="underline" href={photo.licenseUrl}>{photo.license}</a> via <a class="underline" href={photo.source}>Wikimedia Commons</a> · आकार घटाया गया; प्रस्तुति में क्रॉप।</figcaption>
             </figure>
           ))}
         </div>
@@ -370,7 +336,7 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
         <div class="mt-8 overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/5 shadow-2xl">
           <iframe
             title="दशम जलप्रपात का मानचित्र"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6525.371072951572!2d85.46410676270204!3d23.143547579001932!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f5056e67b9e4a3%3A0x25570e4d2a5836ee!2sDassam%20Falls!5e1!3m2!1shi!2sin!4v1789091869210!5m2!1shi!2sin"
+            src="https://www.google.com/maps?q=23.1462515,85.4672203&amp;hl=hi&amp;z=16&amp;output=embed"
             width="100%"
             height="480"
             style="border:0"
@@ -396,13 +362,19 @@ const pageDescription = 'दशम जलप्रपात (Dassam Falls) र�
         </div>
       </div>
     </section>
+    <section id="sources" class="section pt-0"><div class="container card"><h2 class="text-2xl">स्रोत, स्थिति और गोपनीयता</h2>
+      <p class="prose-muted mt-4">स्रोत जाँच: 29 अक्टूबर 2026। यह लाइव बंदी या बाढ़ चेतावनी सेवा नहीं है। प्रस्थान से पहले जिला घोषणा और स्थल-प्रबंधन की सूचना देखें; बंद रास्ते, तेज वर्षा या बढ़ते पानी में आगे न बढ़ें। आधिकारिक शुल्क सूची नहीं मिली; किसी निजी भुगतान लिंक को प्रवेश-पत्र न मानें।</p>
+      <ul class="mt-4 space-y-3"><li><a class="underline" href="https://www.incredibleindia.gov.in/en/jharkhand/ranchi/dassam-falls">Incredible India · नदी, भूगोल और पानी में न उतरने की चेतावनी</a></li><li><a class="underline" href="https://tourism.jharkhand.gov.in/destinationDetails/64">झारखण्ड पर्यटन · मौसम व स्थान</a></li><li><a class="underline" href="https://ranchi.nic.in/tourist-place/dassam-fall/">राँची जिला · स्थान और पहुँच (ऐतिहासिक विवरण)</a></li><li><a class="underline" href="https://ranchi.nic.in/notice_category/announcements/">राँची जिला · घोषणाएँ जाँचें</a></li></ul>
+      <h3 class="mt-6 text-xl">गोपनीयता और उपयोग</h3><p class="prose-muted mt-3">Google Analytics केवल आपकी स्वीकार की गई पसंद पर लोड होता है। पसंद इस ब्राउज़र में रखी जाती है; कुकी विकल्प से बदल सकते हैं। Google का मानचित्र स्वतंत्र तृतीय-पक्ष कनेक्शन बनाता है। Cloudflare होस्टिंग स्वतंत्र रूप से कनेक्शन व प्रदर्शन डेटा संसाधित कर सकती है; यह Analytics अनुमति के नियंत्रण में नहीं है। <a class="underline" href="https://policies.google.com/privacy">Google</a> और <a class="underline" href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> की नीतियाँ लागू होती हैं। पहले भेजे गए Analytics डेटा को पसंद बदलने से वापस नहीं लिया जाता। यहाँ खाते, बुकिंग या संपर्क फ़ॉर्म नहीं हैं।</p>
+      <p class="prose-muted mt-3">यह संपादकीय मार्गदर्शन है, प्रवेश, सुविधा, सुरक्षा या यात्रा-समय की गारंटी नहीं। बाहरी सेवाओं के अपने नियम हैं; गाइड का सरकारी विभाग या फ़ोटोकारों से समर्थन-संबंध नहीं है।</p><button type="button" class="button-secondary mt-4" data-cookie-settings>कुकी विकल्प</button>
+    </div></section>
   </main>
 
   <footer class="border-t border-white/10 py-10">
     <div class="container flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
       <div>
         <p class="m-0 text-lg font-semibold">दशम जलप्रपात</p>
-        <p class="footer-note mt-2">यह एक स्वतंत्र, गैर-आधिकारिक पर्यटन सूचना वेबसाइट है; अंतिम स्थल-निर्देश, समय और शुल्क के लिए स्थानीय / आधिकारिक सूचना को प्राथमिकता दें।</p>
+        <p class="footer-note mt-2">यह स्वतंत्र, गैर-आधिकारिक और गैर-लाभकारी पर्यटन व जन-शिक्षा सूचना गाइड है; अंतिम स्थल-निर्देश, समय और शुल्क के लिए स्थानीय / आधिकारिक सूचना को प्राथमिकता दें।</p>
       </div>
       <a class="badge-link" href={ATTRACTION.mapsUrl} target="_blank" rel="noreferrer">Google Maps खोलें ↗</a>
     </div>

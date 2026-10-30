@@ -14,5 +14,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: SITE ? [sitemap()] : [],
+  integrations: SITE ? [sitemap({filter: (page) => !/\/404(?:\.html|\/)?$/.test(new URL(page).pathname)})] : [],
 });

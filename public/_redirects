@@ -1,5 +1,2 @@
-# Domain-level redirects (http -> https and www -> apex) are NOT supported by
-# Cloudflare Workers Static Assets via _redirects. Configure them in the
-# Cloudflare dashboard instead:
-#   1. SSL/TLS -> Edge Certificates -> "Always Use HTTPS" = On
-#   2. Rules -> Redirect Rules: www.dassamfall.com/* -> https://dassamfall.com/$1 (301)
+# Canonical host/protocol redirects are handled by src/worker.js.
+# No absolute-source redirect rules are used by Static Assets.
