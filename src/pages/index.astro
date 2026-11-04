@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { ATTRACTION } from '../data/site';
+import TopicLinks from '../components/TopicLinks.astro';
+import TopicPriorityLinks from '../components/TopicPriorityLinks.astro';
+import { ATTRACTION, CHECKED_DATE, OFFICIAL_SOURCES, INDEPENDENT_DISCLAIMER } from '../data/site';
 
 const photos = [
   {
@@ -26,8 +28,18 @@ const photos = [
 const facts = [
   ['Google Maps रेटिंग', '4.5 / 5'],
   ['तृतीय-पक्ष समीक्षाएँ', ATTRACTION.reviewCount.toLocaleString('en-IN')],
-  ['ऊँचाई', 'लगभग 144 फ़ीट'],
+  ['ऊँचाई', 'लगभग 44 मीटर'],
   ['नदी', 'काँची नदी'],
+];
+
+// P0: mobile-first direct answers to the queries already visible in Search Console.
+const quickAnswers = [
+  { q: 'दशम जलप्रपात किस नदी पर है?', a: 'काँची नदी (Kanchi River)' },
+  { q: 'कहाँ स्थित है?', a: 'राँची के पास, तरुब, झारखण्ड 835204' },
+  { q: 'ऊँचाई कितनी है?', a: 'लगभग 44 मीटर (144 फ़ीट)' },
+  { q: 'राँची से दूरी?', a: 'लगभग 35–45 किमी' },
+  { q: 'घूमने का अच्छा समय?', a: 'अक्टूबर से जनवरी' },
+  { q: 'क्या पानी में उतरना सुरक्षित है?', a: 'नहीं — तेज धारा के कारण पानी में न उतरें' },
 ];
 
 const nearbyFood = [
@@ -41,7 +53,7 @@ const nearbyAttractions = [
 ];
 
 const faq = [
-  {q:'दशम जलप्रपात किस नदी पर है?', a:'यह काँची (Kanchi) नदी पर है। झारखण्ड पर्यटन इसे सुवर्णरेखा की सहायक नदी बताता है। Incredible India काँची नदी, लगभग 44 मीटर ऊँचाई और पानी में न उतरने की चेतावनी का स्रोत है। राँची जिला पृष्ठ में नदी का नाम Kachni लिखा है; यह उसी दशम जलप्रपात का विवरण है।'},
+  {q:'दशम जलप्रपात किस नदी पर है? (Dassam Falls kis nadi par hai)', a:'काँची नदी (Kanchi River) पर। झारखण्ड पर्यटन इसे स्वर्णरेखा नदी की सहायक नदी बताता है। Incredible India काँची नदी, लगभग 44 मीटर ऊँचाई और पानी में न उतरने की चेतावनी का स्रोत है। राँची ज़िला पृष्ठ में नाम Kachni लिखा है — यह उसी नदी की वर्तनी है।'},
   {
     q: 'दशम जलप्रपात जाने का सबसे अच्छा समय कौन-सा है?',
     a: 'झारखण्ड पर्यटन अक्टूबर–जनवरी सुझाता है। Incredible India वर्षा-ऋतु के अधिक बहाव और अक्टूबर–नवंबर के विकल्प का वर्णन करता है। ये मौसमी सुझाव हैं, सुरक्षा या खुलने की गारंटी नहीं; मौसम और स्थानीय प्रतिबंध पहले जाँचें।',
@@ -64,21 +76,24 @@ const faq = [
   },
   {
     q: 'राँची से दशम जलप्रपात की दूरी कितनी है?',
-    a: 'राँची जिला पृष्ठ 34 किमी और झारखण्ड पर्यटन लगभग 45 किमी बताता है; प्रारंभिक बिंदु व मार्ग अलग हो सकते हैं। चुने हुए प्रस्थान-बिंदु से वर्तमान सड़क मार्ग देखें; तय यात्रा-समय या उपलब्ध परिवहन की गारंटी नहीं है।',
+    a: 'राँची ज़िला पृष्ठ लगभग 34 किमी, झारखण्ड सरकार लगभग 40 किमी और झारखण्ड पर्यटन लगभग 45 किमी बताते हैं; प्रारंभिक बिंदु व मार्ग अलग हो सकते हैं। इसलिए 35–45 किमी का सीमा-मान रखें और चुने हुए प्रस्थान-बिंदु से वर्तमान सड़क मार्ग देखें; तय यात्रा-समय या उपलब्ध परिवहन की गारंटी नहीं है।',
   },
   {
     q: 'दशम जलप्रपात का दर्शन / खुलने का समय क्या है?',
-    a: '29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था; यह पूरा साप्ताहिक समय-सारिणी या अभी प्रवेश की पुष्टि नहीं है। वर्तमान आधिकारिक शुल्क, अंतिम प्रवेश और बंदी सूचना सत्यापित नहीं मिली; यात्रा से पहले स्थानीय प्रबंधन और जिला सूचना देखें।',
+    a: '4 नवंबर 2026 तक कोई पूरी आधिकारिक साप्ताहिक समय-सारिणी या अंतिम प्रवेश सत्यापित नहीं मिला है। 29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था, पर यह तृतीय-पक्ष सूचना है और आज प्रवेश की पुष्टि नहीं। यात्रा से पहले स्थानीय प्रबंधन और ज़िला घोषणाएँ देखें।',
   },
 ];
+
+const siteRoot = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const attractionId = `${siteRoot}#falls`;
 
 const attractionJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'TouristAttraction',
-  '@id': `${Astro.site}#falls`,
+  '@id': attractionId,
   name: 'Dassam Falls',
-  alternateName: ['दशम जलप्रपात', 'दशम फॉल्स', 'Dassam Ghagh'],
-  description: 'झारखण्ड के राँची ज़िले के पास स्थित प्राकृतिक जलप्रपात, जो काँची नदी पर लगभग 144 फ़ीट की ऊँचाई से गिरता है।',
+  alternateName: ['दशम जलप्रपात', 'दशम फॉल्स', 'Dassam Ghagh', 'Dassam Fall'],
+  description: 'झारखण्ड के राँची ज़िले में तरुब के पास स्थित प्राकृतिक जलप्रपात, जो काँची नदी (स्वर्णरेखा की सहायक नदी) पर लगभग 44 मीटर / 144 फ़ीट की ऊँचाई से गिरता है; राँची से सड़क दूरी लगभग 35–45 किमी।',
   image: photos.map((item) => (Astro.site ? new URL(item.src, Astro.site).toString() : item.src)),
   url: Astro.site ? new URL('/', Astro.site).toString() : undefined,
   telephone: undefined,
@@ -101,7 +116,7 @@ const attractionJsonLd = {
 const faqJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  '@id': `${Astro.site}#faq`,
+  '@id': `${siteRoot}/#faq`,
   mainEntity: faq.map((item) => ({
     '@type': 'Question',
     name: item.q,
@@ -112,8 +127,8 @@ const faqJsonLd = {
   })),
 };
 
-const pageTitle = 'दशम जलप्रपात किस नदी पर है? Dassam Falls राँची यात्रा गाइड';
-const pageDescription = 'काँची नदी पर दशम जलप्रपात: स्थान, नदी, मौसम और सुरक्षित दर्शन की जानकारी। समय, शुल्क और बंदी की पुष्टि के लिए स्रोत व जाँच-सुझाव।';
+const pageTitle = 'दशम जलप्रपात (Dassam Falls): नदी, दूरी, समय और यात्रा गाइड';
+const pageDescription = 'दशम जलप्रपात काँची नदी पर स्थित है। जानें राँची से दूरी (लगभग 35–45 किमी), रास्ता, 44 मीटर ऊँचाई, घूमने का सही समय, सुरक्षा सुझाव और यात्रा की ज़रूरी जानकारी — आधिकारिक स्रोतों पर आधारित स्वतंत्र गाइड।';
 ---
 
 <BaseLayout title={pageTitle} description={pageDescription} jsonLd={[attractionJsonLd, faqJsonLd]}>
@@ -124,9 +139,11 @@ const pageDescription = 'काँची नदी पर दशम जलप्
         <img src="/logo.svg" alt="दशम जलप्रपात लोगो" class="h-10 w-auto" />
       </a>
       <nav class="flex flex-wrap gap-4 text-sm text-white/80">
+        <a href="#management">प्रशासन</a>
+        <a href="#quick">त्वरित उत्तर</a>
         <a href="#overview">परिचय</a>
         <a href="#plan">यात्रा योजना</a>
-        <a href="#gallery">गैलरी</a>
+        <a href="#guides">विषय-गाइड</a>
         <a href="#map">मानचित्र</a>
         <a href="#faq">FAQ</a>
       </nav>
@@ -143,8 +160,8 @@ const pageDescription = 'काँची नदी पर दशम जलप्
       <div class="container relative z-10 grid min-h-[88vh] items-end gap-12 py-16 md:grid-cols-[1.1fr_0.9fr] md:py-24">
         <div class="max-w-3xl">
           <div class="section-kicker">झारखण्ड · राँची क्षेत्र · प्राकृतिक जलप्रपात</div>
-          <h1 class="mt-6 text-5xl font-black leading-tight tracking-tight text-white md:text-7xl">
-            दशम जलप्रपात
+          <h1 class="mt-6 text-4xl font-black leading-tight tracking-tight text-white md:text-6xl">
+            दशम जलप्रपात (Dassam Falls)
           </h1>
           <p class="mt-4 max-w-2xl text-lg leading-8 text-white/84 md:text-xl">
             काँची नदी की शक्तिशाली धाराओं से बनता यह प्रसिद्ध जलप्रपात राँची के पास प्रकृति,
@@ -160,7 +177,7 @@ const pageDescription = 'काँची नदी पर दशम जलप्
         </div>
 
         <aside class="glass rounded-[1.8rem] p-5 md:p-6">
-          <p class="mb-4 text-sm">Maps स्नैपशॉट: 29 अक्टूबर 2026। समीक्षाएँ इस गाइड ने एकत्र नहीं कीं।</p>
+          <p class="mb-4 text-sm">Maps स्नैपशॉट: {CHECKED_DATE} ({ATTRACTION.reviewCount.toLocaleString('en-IN')} समीक्षाएँ)। समीक्षाएँ इस गाइड ने एकत्र नहीं कीं।</p>
           <div class="grid grid-cols-2 gap-4">
             {facts.map(([label, value]) => (
               <div class="card">
@@ -173,10 +190,89 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             <p class="m-0 text-sm uppercase tracking-[0.18em] text-[#f4deb0]">पता</p>
             <p class="mt-3 text-base leading-7 text-white/85">4FW8+GV5, Tarub, Jharkhand 835204, India</p>
             <p class="mt-3 text-sm leading-7 text-white/72">
-              जिला स्रोत 34 किमी, राज्य पर्यटन लगभग 45 किमी बताता है; प्रस्थान-बिंदु और मार्ग की पुष्टि करें।
+              ज़िला स्रोत ~34 किमी, राज्य सरकार ~40 किमी, राज्य पर्यटन ~45 किमी; प्रस्थान-बिंदु और मार्ग के अनुसार लगभग 35–45 किमी मानें।
             </p>
           </div>
         </aside>
+      </div>
+    </section>
+
+    <section id="management" class="section pt-0">
+      <div class="container grid gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <div class="section-kicker">स्थल और प्रशासन</div>
+          <h2 class="section-title mt-5">दशम जलप्रपात के बारे में</h2>
+          <p class="prose-muted mt-5">
+            दशम जलप्रपात का प्रशासनिक दायरा <strong>झारखण्ड सरकार के पर्यटन विभाग और राँची ज़िला प्रशासन</strong> के आधिकारिक पर्यटन-ढाँचे में आता है: स्थल का विवरण राज्य पर्यटन विभाग, ज़िला प्रशासन और Incredible India के पृष्ठों पर दर्ज है, जबकि पहुँच, सुरक्षा और अस्थायी बंदी से जुड़ी सूचना ज़िला स्तर से जारी होती है। राँची क्षेत्र के सबसे परिचित प्राकृतिक जलप्रपातों में इसकी अलग पहचान है।
+          </p>
+          <p class="prose-muted mt-4">
+            शहर के बाग़ या किसी स्मारक की तरह निर्मित नहीं, यह काँची नदी के चट्टानी मार्ग पर बना प्राकृतिक जलप्रपात है। झारखण्ड पर्यटन, राज्य सरकार और Incredible India के अनुसार काँची नदी स्वर्णरेखा नदी की सहायक नदी है और यहाँ पानी लगभग 44 मीटर (144 फ़ीट) की ऊँचाई से गिरता है। वर्षा के बाद का तेज़ बहाव और चट्टानी घाटी इसे राँची के प्राकृतिक परिदृश्य का प्रतीक बनाते हैं — और उसी तेज़ धारा के कारण पानी में उतरना असुरक्षित भी है।
+          </p>
+          <p class="prose-muted mt-4">
+            आज यह राँची से एक दिन की सड़क-यात्रा का लोकप्रिय गंतव्य है; दर्शन, फ़ोटोग्राफ़ी और प्रकृति-भ्रमण के लिए अक्टूबर से जनवरी का समय सुझाया जाता है। प्रवेश शुल्क या “निःशुल्क प्रवेश” की कोई पुष्ट आधिकारिक सूची नहीं मिली है, इसलिए यह गाइड न कोई दर बताती है और न मुफ़्त प्रवेश की गारंटी देती है। यात्रा से पहले ज़िला प्रशासन की घोषणाएँ और स्थल पर लगे ताज़ा निर्देश देखें।
+          </p>
+          <div class="mt-6 flex flex-wrap gap-3 text-sm">
+            <a class="badge-link" href={OFFICIAL_SOURCES[0].url} target="_blank" rel="noreferrer">झारखण्ड पर्यटन ↗</a>
+            <a class="badge-link" href={OFFICIAL_SOURCES[1].url} target="_blank" rel="noreferrer">राँची ज़िला प्रशासन ↗</a>
+            <a class="badge-link" href="#sources">सभी आधिकारिक स्रोत →</a>
+          </div>
+          <p class="prose-muted mt-5 text-sm">स्रोत जाँच: {CHECKED_DATE}। {INDEPENDENT_DISCLAIMER}</p>
+        </div>
+        <aside class="card">
+          <h3 class="m-0 text-xl">देखभाल और सूचना किसके पास?</h3>
+          <ul class="topic-bullets mt-4">
+            <li><strong>झारखण्ड पर्यटन विभाग</strong> — आधिकारिक पर्यटन-सूची, काँची नदी, लगभग 44 मीटर ऊँचाई और मौसमी सुझाव।</li>
+            <li><strong>राँची ज़िला प्रशासन</strong> — स्थल की जानकारी, ज़िला स्तर की घोषणाएँ और मौसमी प्रतिबंध।</li>
+            <li><strong>स्थल-प्रबंधन</strong> — समय, शुल्क, रास्ते और बैरियर के ताज़ा निर्देश। किसी एक प्रबंधक इकाई या निजी ऑपरेटर का नाम आधिकारिक पृष्ठों पर सत्यापित नहीं मिला है, इसलिए हम ऐसा दावा नहीं करते।</li>
+          </ul>
+          <p class="prose-muted mt-4 text-sm">यह पृष्ठ स्वतंत्र गाइड है, किसी सरकारी विभाग या स्थल-प्रबंधन की ओर से प्रकाशित नहीं; अंतिम निर्णय के लिए उपर्युक्त आधिकारिक स्रोत और स्थल के निर्देश मानें।</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="quick" class="section pt-0">
+      <div class="container">
+        <div class="section-kicker">सीधा उत्तर</div>
+        <h2 class="section-title mt-5">दशम जलप्रपात: त्वरित उत्तर</h2>
+        <div class="answer-grid">
+          {quickAnswers.map((item) => (
+            <div class="answer-row">
+              <span class="answer-q">{item.q}</span>
+              <span class="answer-a">{item.a}</span>
+            </div>
+          ))}
+        </div>
+        <p class="prose-muted mt-5 text-sm">तथ्य-जाँच: {CHECKED_DATE}। खुलने का समय, शुल्क, पार्किंग और रास्तों की स्थिति बदल सकती हैं; यात्रा से पहले आधिकारिक / स्थल-प्रबंधन की सूचना देखें। {INDEPENDENT_DISCLAIMER}</p>
+      </div>
+    </section>
+
+    <TopicPriorityLinks />
+
+    <section id="river" class="section pt-0">
+      <div class="container">
+        <h2 class="section-title">दशम जलप्रपात किस नदी पर है?</h2>
+        <p class="prose-muted mt-5"><strong>सीधा उत्तर: काँची नदी (Kanchi River)।</strong> झारखण्ड पर्यटन और Incredible India के अनुसार दशम जलप्रपात काँची नदी पर स्थित है, जो स्वर्णरेखा नदी की सहायक नदी है। राँची ज़िला के कुछ अंग्रेज़ी पृष्ठों में "Kachni" वर्तनी मिलती है — यह उसी नदी का नाम-भेद है, कोई दूसरी नदी नहीं।</p>
+        <p class="prose-muted mt-4">वर्षा-ऋतु में बहाव बढ़ता है, पर तेज धारा और फिसलन भरी चट्टानें जोखिम भी बढ़ाती हैं; Incredible India पानी में उतरने को असुरक्षित बताता है।</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="badge-link" href="/dassam-falls-kis-nadi-par-hai/">नदी: पूरा गाइड →</a>
+          <a class="badge-link" href="/kanchi-river/">काँची नदी →</a>
+          <a class="badge-link" href="/dassam-falls-safety/">सुरक्षा सुझाव →</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="where" class="section pt-0">
+      <div class="container grid gap-5 lg:grid-cols-2">
+        <article class="card">
+          <h2 class="text-2xl">दशम जलप्रपात कहाँ स्थित है?</h2>
+          <p class="prose-muted mt-4 text-sm">झारखण्ड राज्य के राँची ज़िले में तरुब (Tarub) क्षेत्र के पास, पिन 835204। Plus Code 4FW8+GV5; राँची शहर से सड़क दूरी लगभग 35–45 किमी। यह शहर के भीतर नहीं, बल्कि सड़क मार्ग से जुड़ा अलग स्थल है।</p>
+          <a class="badge-link mt-5" href="/dassam-falls-location/">स्थान और मानचित्र →</a>
+        </article>
+        <article class="card">
+          <h2 class="text-2xl">दशम जलप्रपात की ऊँचाई</h2>
+          <p class="prose-muted mt-4 text-sm">लगभग 44 मीटर (144 फ़ीट)। यह आँकड़ा झारखण्ड पर्यटन, राज्य सरकार और Incredible India के विवरण से मेल खाता है; माप-विधि का विवरण स्रोतों में नहीं मिला, इसलिए इसे "लगभग" मानें।</p>
+          <a class="badge-link mt-5" href="/dassam-falls-height/">ऊँचाई और भू-दृश्य →</a>
+        </article>
       </div>
     </section>
 
@@ -191,7 +287,7 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             यह राँची से एक दिन की यात्रा, परिवार के साथ प्रकृति-भ्रमण और फ़ोटोग्राफ़ी के लिए पसंदीदा स्थल है।
           </p>
           <p class="prose-muted mt-4">
-            जलप्रपात की ऊँचाई लगभग 144 फ़ीट मानी जाती है। बहाव मौसम और वर्षा के अनुसार बदलता है। फिर भी यही मौसम अतिरिक्त सावधानी भी माँगता है—फिसलन, तेज धारा और चट्टानी किनारे
+            जलप्रपात की ऊँचाई लगभग 44 मीटर (144 फ़ीट) मानी जाती है। बहाव मौसम और वर्षा के अनुसार बदलता है। फिर भी यही मौसम अतिरिक्त सावधानी भी माँगता है—फिसलन, तेज धारा और चट्टानी किनारे
             इस स्थल को सुंदर भी बनाते हैं और संवेदनशील भी।
           </p>
         </div>
@@ -203,9 +299,9 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             </p>
           </div>
           <div class="card">
-            <h3 class="m-0 text-xl">दशम जलप्रपात किस नदी पर है?</h3>
+            <h3 class="m-0 text-xl">काँची नदी और स्वर्णरेखा</h3>
             <p class="prose-muted mt-3 text-sm">
-              काँची (Kanchi) नदी पर। झारखण्ड पर्यटन इसे सुवर्णरेखा की सहायक नदी बताता है; जिला स्रोत में Kachni वर्तनी है।
+              झारखण्ड पर्यटन काँची को स्वर्णरेखा की सहायक नदी बताता है; राँची ज़िला स्रोत में Kachni वर्तनी है। दोनों एक ही नदी के रूप हैं।
             </p>
           </div>
           <div class="card">
@@ -234,36 +330,42 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             <p class="prose-muted mt-3 text-sm">
               राज्य पर्यटन अक्टूबर–जनवरी सुझाता है; राष्ट्रीय पर्यटन पृष्ठ वर्षा-ऋतु व अक्टूबर–नवंबर का भी उल्लेख करता है। तेज बहाव देखने के लिए जोखिम न लें; मौसम और बंदी सूचना को प्राथमिकता दें।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/best-time-to-visit-dassam-falls/">मौसम गाइड →</a>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">खुलने का समय</h3>
             <p class="prose-muted mt-3 text-sm">
-              29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था। पूरा आधिकारिक साप्ताहिक समय या अंतिम प्रवेश सत्यापित नहीं है; यह आज प्रवेश की गारंटी नहीं। स्थानीय प्रबंधन से पुष्टि करें।
+              {CHECKED_DATE} तक पूरी आधिकारिक साप्ताहिक समय-सारिणी या अंतिम प्रवेश सत्यापित नहीं है। 29 अक्टूबर 2026 को Maps पर 18:00 तक खुलने का संकेत था, पर यह तृतीय-पक्ष सूचना है। स्थानीय प्रबंधन से पुष्टि करें।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/dassam-falls-timings/">समय और बंदी गाइड →</a>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">प्रवेश शुल्क / खर्च</h3>
             <p class="prose-muted mt-3 text-sm">
               निश्चित दर यहाँ जानबूझकर नहीं दी गई है। यदि प्रवेश, वाहन या अन्य शुल्क लागू हों, तो स्थल पर प्रदर्शित दरों को अंतिम मानें। नकद रखना उपयोगी हो सकता है।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/dassam-falls-entry-fee/">शुल्क की स्थिति →</a>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">पार्किंग</h3>
             <p class="prose-muted mt-3 text-sm">
               अधिकृत पार्किंग, शुल्क, समय और उपलब्ध स्थान की पुष्टि करें। इस गाइड ने वर्तमान पार्किंग क्षमता या किसी ऑपरेटर को सत्यापित नहीं किया है।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/dassam-falls-parking/">पार्किंग गाइड →</a>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">यात्रा अवधि</h3>
             <p class="prose-muted mt-3 text-sm">
               संपादकीय सुझाव: रास्ते और वापसी सहित समय का अतिरिक्त अंतर रखें। 1.5–2.5 घंटे केवल योजना का विकल्प है, आधिकारिक अवधि या खुले रास्तों की गारंटी नहीं।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/dassam-falls-day-trip/">एक दिन की यात्रा →</a>
           </article>
           <article class="card">
             <h3 class="m-0 text-xl">क्या साथ रखें</h3>
             <p class="prose-muted mt-3 text-sm">
-              पानी, हल्का नाश्ता, ग्रिप वाले जूते, बरसाती मौसम में अतिरिक्त कपड़े, मोबाइल के लिए वॉटर-सेफ पाउच और कचरा वापस ले जाने के लिए बैग।
+              पानी, हल्का नाश्ता, ग्रिप वाले जूते, बरसाती मौसम में अतिरिक्त कपड़े, मोबाइल के लिए जल-सुरक्षित पाउच और कचरा वापस ले जाने के लिए बैग।
             </p>
+            <a class="mt-3 inline-block text-sm underline" href="/dassam-falls-visitor-facilities/">सुविधाएँ और तैयारी →</a>
           </article>
         </div>
       </div>
@@ -279,6 +381,11 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             <li><strong>निकटतम रेल संपर्क:</strong> राँची रेलवे स्टेशन — स्टेशन/शहर से टैक्सी या स्वयं-ड्राइव वाहन लें।</li>
             <li><strong>बस / साझा वाहन:</strong> राँची से तैमारा / बुंडू दिशा में स्थानीय कनेक्टिविटी मिल सकती है, लेकिन अंतिम खंड के लिए निजी वाहन या रिज़र्व ऑटो/कैब अधिक सुविधाजनक है।</li>
           </ul>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm">
+            <a class="underline" href="/ranchi-to-dassam-falls/">राँची से रास्ता →</a>
+            <a class="underline" href="/how-to-reach-dassam-falls/">सभी वाहन विकल्प →</a>
+            <a class="underline" href="/dassam-falls-public-transport/">बस की स्थिति →</a>
+          </div>
         </article>
         <article id="safety" class="card">
           <h2 class="text-2xl">सुरक्षा व सावधानियाँ</h2>
@@ -288,7 +395,31 @@ const pageDescription = 'काँची नदी पर दशम जलप्
             <li>बरसात या भारी प्रवाह के दौरान बैरियर, रस्सी और चेतावनी चिन्हों का कड़ाई से पालन करें।</li>
             <li>बच्चों और बुज़ुर्गों के साथ धीमी गति से चलें; सीढ़ियाँ और उतराई सतर्कता माँगती हैं।</li>
           </ul>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm">
+            <a class="underline" href="/dassam-falls-safety/">पूरी सुरक्षा गाइड →</a>
+            <a class="underline" href="/dassam-falls-monsoon/">बरसात में सावधानी →</a>
+            <a class="underline" href="/dassam-falls-family-guide/">परिवार के साथ →</a>
+          </div>
         </article>
+      </div>
+    </section>
+
+    <section id="things" class="section pt-0">
+      <div class="container card">
+        <h2 class="text-2xl">यहाँ क्या देखें और क्या करें</h2>
+        <p class="prose-muted mt-4 text-sm">यह एक प्राकृतिक दर्शन-स्थल है, कोई नियोजित गतिविधि-पार्क नहीं। दर्शन के दायरे में रहकर:</p>
+        <ul class="topic-bullets mt-4">
+          <li>काँची नदी की धारा और लगभग 44 मीटर के ढलान से गिरता पानी — केवल अनुमत दर्शन-क्षेत्र से।</li>
+          <li>चट्टानी भू-दृश्य और आसपास की हरियाली; मौसम के अनुसार बहाव का बदलता दृश्य।</li>
+          <li>सुरक्षित दूरी से फ़ोटोग्राफ़ी; बैरियर पार न करें और गीली चट्टानों पर न जाएँ।</li>
+          <li>राँची से आधे दिन / एक दिन की सड़क-यात्रा के साथ जोड़ना — वापसी का वाहन पहले तय करें।</li>
+        </ul>
+        <p class="prose-muted mt-4 text-sm">पानी में उतरना, स्नान, तैराकी, डाइविंग या चट्टान-चढ़ाई यहाँ अनुशंसित नहीं है। किसी विशेष व्यू-पॉइंट, पिकनिक क्षेत्र या सुविधा के चालू होने की पुष्टि नहीं मिली है।</p>
+        <div class="mt-5 flex flex-wrap gap-3 text-sm">
+          <a class="underline" href="/dassam-falls-photography/">फ़ोटोग्राफ़ी →</a>
+          <a class="underline" href="/dassam-falls-half-day-itinerary/">आधे दिन की योजना →</a>
+          <a class="underline" href="/dassam-falls-visitor-facilities/">सुविधाएँ →</a>
+        </div>
       </div>
     </section>
 
@@ -324,6 +455,11 @@ const pageDescription = 'काँची नदी पर दशम जलप्
                 <p class="prose-muted mt-2 text-sm">{item.detail}</p>
               </div>
             ))}
+          </div>
+          <div class="mt-4 flex flex-wrap gap-3 text-sm">
+            <a class="underline" href="/places-near-dassam-falls/">आसपास के स्थल →</a>
+            <a class="underline" href="/ranchi-waterfalls-guide/">राँची के जलप्रपात →</a>
+            <a class="underline" href="/ranchi-waterfalls-one-day-trip/">एक दिन की योजना →</a>
           </div>
         </article>
       </div>
@@ -362,9 +498,17 @@ const pageDescription = 'काँची नदी पर दशम जलप्
         </div>
       </div>
     </section>
-    <section id="sources" class="section pt-0"><div class="container card"><h2 class="text-2xl">स्रोत, स्थिति और गोपनीयता</h2>
-      <p class="prose-muted mt-4">स्रोत जाँच: 29 अक्टूबर 2026। यह लाइव बंदी या बाढ़ चेतावनी सेवा नहीं है। प्रस्थान से पहले जिला घोषणा और स्थल-प्रबंधन की सूचना देखें; बंद रास्ते, तेज वर्षा या बढ़ते पानी में आगे न बढ़ें। आधिकारिक शुल्क सूची नहीं मिली; किसी निजी भुगतान लिंक को प्रवेश-पत्र न मानें।</p>
-      <ul class="mt-4 space-y-3"><li><a class="underline" href="https://www.incredibleindia.gov.in/en/jharkhand/ranchi/dassam-falls">Incredible India · नदी, भूगोल और पानी में न उतरने की चेतावनी</a></li><li><a class="underline" href="https://tourism.jharkhand.gov.in/destinationDetails/64">झारखण्ड पर्यटन · मौसम व स्थान</a></li><li><a class="underline" href="https://ranchi.nic.in/tourist-place/dassam-fall/">राँची जिला · स्थान और पहुँच (ऐतिहासिक विवरण)</a></li><li><a class="underline" href="https://ranchi.nic.in/notice_category/announcements/">राँची जिला · घोषणाएँ जाँचें</a></li></ul>
+    <TopicLinks />
+
+    <section id="sources" class="section pt-0"><div class="container card"><h2 class="text-2xl">स्रोत, तथ्य-जाँच और गोपनीयता</h2>
+      <p class="prose-muted mt-4">स्रोत जाँच: {CHECKED_DATE}। यह लाइव बंदी या बाढ़ चेतावनी सेवा नहीं है। प्रस्थान से पहले ज़िला घोषणा और स्थल-प्रबंधन की सूचना देखें; बंद रास्ते, तेज वर्षा या बढ़ते पानी में आगे न बढ़ें। आधिकारिक शुल्क सूची नहीं मिली; किसी निजी भुगतान लिंक को प्रवेश-पत्र न मानें।</p>
+      <h3 class="mt-6 text-xl">आधिकारिक स्रोत और तथ्य-भंडार</h3>
+      <ul class="source-list mt-4">
+        {OFFICIAL_SOURCES.map((source) => (
+          <li><a class="underline" href={source.url} target="_blank" rel="noreferrer">{source.label}</a><span class="text-white/70"> — {source.use}</span></li>
+        ))}
+      </ul>
+      <p class="prose-muted mt-5">राँची से दूरी (लगभग 34 / 40 / 45 किमी) और नदी की वर्तनी (Kanchi / Kachni) में आधिकारिक स्रोतों का मतभेद दर्ज है, इसलिए एक निश्चित आँकड़ा नहीं दिया गया है। खुलने का समय, अंतिम प्रवेश, शुल्क, पार्किंग, बस सेवा, सड़क की स्थिति और सुविधाएँ बदल सकती हैं; अगली समीक्षा में इनकी फिर जाँच की जाएगी।</p>
       <h3 class="mt-6 text-xl">गोपनीयता और उपयोग</h3><p class="prose-muted mt-3">Google Analytics केवल आपकी स्वीकार की गई पसंद पर लोड होता है। पसंद इस ब्राउज़र में रखी जाती है; कुकी विकल्प से बदल सकते हैं। Google का मानचित्र स्वतंत्र तृतीय-पक्ष कनेक्शन बनाता है। Cloudflare होस्टिंग स्वतंत्र रूप से कनेक्शन व प्रदर्शन डेटा संसाधित कर सकती है; यह Analytics अनुमति के नियंत्रण में नहीं है। <a class="underline" href="https://policies.google.com/privacy">Google</a> और <a class="underline" href="https://www.cloudflare.com/privacypolicy/">Cloudflare</a> की नीतियाँ लागू होती हैं। पहले भेजे गए Analytics डेटा को पसंद बदलने से वापस नहीं लिया जाता। यहाँ खाते, बुकिंग या संपर्क फ़ॉर्म नहीं हैं।</p>
       <p class="prose-muted mt-3">यह संपादकीय मार्गदर्शन है, प्रवेश, सुविधा, सुरक्षा या यात्रा-समय की गारंटी नहीं। बाहरी सेवाओं के अपने नियम हैं; गाइड का सरकारी विभाग या फ़ोटोकारों से समर्थन-संबंध नहीं है।</p><button type="button" class="button-secondary mt-4" data-cookie-settings>कुकी विकल्प</button>
     </div></section>

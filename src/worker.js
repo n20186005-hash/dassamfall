@@ -3,8 +3,15 @@ export default {
   /** @param {Request} request @param {{ASSETS:{fetch:(request:Request)=>Promise<Response>}}} env */
   async fetch(request, env) {
     const url = new URL(request.url);
-    if (url.hostname === 'www.' + host || (url.hostname === host && url.protocol === 'http:')) {
+    const proto = request.headers.get('x-forwarded-proto') || url.protocol.replace(':', '');
+    if (url.hostname === 'www.' + host || proto === 'http') {
       url.protocol = 'https:'; url.hostname = host; url.port = '';
+      if (!url.pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(url.pathname)) url.pathname += '/';
+      return new Response(null, {status:308,headers:{Location:url.href}});
+    }
+    // Path-level trailing-slash normalisation so /<slug> and /<slug>/ share one canonical URL.
+    if (!url.pathname.endsWith('/') && !/\.[a-z0-9]+$/i.test(url.pathname)) {
+      url.pathname += '/';
       return new Response(null, {status:308,headers:{Location:url.href}});
     }
     const head = request.method === 'HEAD';

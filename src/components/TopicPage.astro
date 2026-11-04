@@ -1,0 +1,237 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import {
+  ATTRACTION,
+  CHECKED_DATE,
+  CHECKED_DATE_ISO,
+  OFFICIAL_SOURCES,
+  INDEPENDENT_DISCLAIMER,
+  VOLATILE_NOTE,
+  withSiteName,
+} from '../data/site';
+import { TOPIC_GROUPS, PRIORITY_LABELS, topicUrl, getTopic, type Topic } from '../data/topics';
+
+interface Props {
+  topic: Topic;
+}
+
+const { topic } = Astro.props;
+
+const path = topicUrl(topic.slug);
+const siteRoot = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+const canonical = siteRoot ? `${siteRoot}${path}` : undefined;
+const websiteId = `${siteRoot}#website`;
+const publisherId = `${siteRoot}#publisher`;
+const attractionId = `${siteRoot}#falls`;
+
+const group = TOPIC_GROUPS[topic.group];
+const isArticle = topic.group === 'knowledge';
+const showPhoto = topic.group === 'knowledge';
+const related = topic.related
+  .map((slug) => getTopic(slug))
+  .filter((item): item is Topic => item !== undefined);
+const sources = topic.sources.map((index) => OFFICIAL_SOURCES[index] ?? OFFICIAL_SOURCES[0]);
+const quickAnswers = topic.quickAnswers ?? [];
+const sections = topic.sections.map((section) => ({
+  heading: section.heading,
+  paragraphs: section.paragraphs ?? [],
+  bullets: section.bullets ?? [],
+}));
+
+const webPageLd = {
+  '@context': 'https://schema.org',
+  '@type': isArticle ? 'Article' : 'WebPage',
+  '@id': `${canonical}#${isArticle ? 'article' : 'webpage'}`,
+  url: canonical,
+  name: topic.h1,
+  ...(isArticle ? { headline: topic.h1, datePublished: CHECKED_DATE_ISO } : {}),
+  description: topic.metaDescription,
+  inLanguage: 'hi',
+  isPartOf: { '@id': websiteId },
+  about: { '@id': attractionId },
+  dateModified: CHECKED_DATE_ISO,
+  author: { '@id': publisherId },
+  publisher: { '@id': publisherId },
+};
+
+const breadcrumbLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  '@id': `${canonical}#breadcrumb`,
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'मुख्य पृष्ठ', item: `${siteRoot}/` },
+    { '@type': 'ListItem', position: 2, name: group.label, item: `${siteRoot}/#guides` },
+    { '@type': 'ListItem', position: 3, name: topic.h1, item: canonical },
+  ],
+};
+
+const faqLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  '@id': `${canonical}#faq`,
+  mainEntity: topic.faqs.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+---
+
+<BaseLayout
+  title={withSiteName(topic.metaTitle)}
+  description={topic.metaDescription}
+  canonicalPath={path}
+  jsonLd={[webPageLd, breadcrumbLd, faqLd]}
+>
+  <a class="skip-link" href="#main">मुख्य सामग्री पर जाएँ</a>
+  <header class="sticky top-0 z-40 border-b border-white/10 bg-black/25 backdrop-blur-xl">
+    <div class="container flex flex-col items-start justify-between gap-3 py-4 md:flex-row md:items-center">
+      <a class="flex items-center gap-3" href="/">
+        <img src="/logo.svg" alt="दशम जलप्रपात लोगो" class="h-10 w-auto" />
+      </a>
+      <nav class="flex flex-wrap gap-4 text-sm text-white/80">
+        <a href="/">मुख्य गाइड</a>
+        <a href="/#guides">सभी विषय</a>
+        <a href="/#faq">FAQ</a>
+        <a href={ATTRACTION.mapsUrl} target="_blank" rel="noreferrer">मानचित्र ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <nav class="container breadcrumb" aria-label="ब्रेडक्रम">
+      <ol>
+        <li><a href="/">मुख्य पृष्ठ</a></li>
+        <li><a href="/#guides">{group.label}</a></li>
+        <li aria-current="page">{topic.h1}</li>
+      </ol>
+    </nav>
+
+    <section class="topic-hero">
+      <div class="container">
+        <div class="topic-meta">
+          <span class="section-kicker">{group.label}</span>
+          <span class="priority-chip">{PRIORITY_LABELS[topic.priority]}</span>
+        </div>
+        <h1 class="section-title mt-5">{topic.h1}</h1>
+        <p class="topic-lead mt-6">{topic.lead}</p>
+        <p class="topic-checked mt-5">तथ्य-जाँच: {CHECKED_DATE} · {INDEPENDENT_DISCLAIMER}</p>
+      </div>
+    </section>
+
+    {quickAnswers.length > 0 && (
+      <section class="section pt-0">
+        <div class="container">
+          <h2 class="text-2xl">त्वरित उत्तर</h2>
+          <div class="quick-grid mt-5">
+            {quickAnswers.map((item) => (
+              <div class="card quick-item">
+                <div class="text-sm text-white/70">{item.q}</div>
+                <div class="quick-answer mt-3">{item.a}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
+
+    <aside class="container notice-bar">
+      <span><strong>सुरक्षा पहले:</strong> तेज धारा और असमान चट्टानों के कारण पानी में न उतरें, स्नान या तैराकी न करें; केवल अनुमत दर्शन-क्षेत्र से देखें।</span>
+      {topic.slug !== 'dassam-falls-safety' && <a href={topicUrl('dassam-falls-safety')}>पूरी सुरक्षा गाइड →</a>}
+    </aside>
+
+    {sections.map((section) => (
+      <section class="section pt-0 topic-section">
+        <div class="container">
+          <h2 class="text-2xl">{section.heading}</h2>
+          {section.paragraphs.map((paragraph) => <p class="prose-muted mt-4">{paragraph}</p>)}
+          <ul class="topic-bullets mt-4">
+            {section.bullets.map((bullet) => <li>{bullet}</li>)}
+          </ul>
+        </div>
+      </section>
+    ))}
+
+    {showPhoto && (
+      <section class="section pt-0">
+        <div class="container">
+          <figure class="photo-frame bg-white/5 topic-figure">
+            <img
+              src="/images/dassam-falls-02.jpg"
+              alt="काँची नदी पर दशम जलप्रपात: चट्टानी तल और हरियाली के बीच गिरती जलधारा"
+              width="1000"
+              height="750"
+              loading="lazy"
+            />
+            <figcaption class="border-t border-white/10 px-5 py-4 text-sm text-white/76">
+              संदर्भ फ़ोटो, 7 अक्टूबर 2024; वर्तमान बहाव या प्रवेश की स्थिति नहीं। © Kingshuk Mondal,
+              <a class="underline" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> via
+              <a class="underline" href="https://commons.wikimedia.org/wiki/File:Dassam_Falls,_Jharkhand,_India_02.jpg">Wikimedia Commons</a>
+              · आकार घटाया गया; प्रस्तुति में क्रॉप।
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+    )}
+
+    <section id="faq" class="section pt-0 faq">
+      <div class="container">
+        <div class="section-kicker">FAQ</div>
+        <h2 class="section-title mt-5">सामान्य प्रश्न</h2>
+        <div class="mt-8 grid gap-4">
+          {topic.faqs.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p class="mt-4 mb-1 leading-8 text-white/78">{item.a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section pt-0">
+      <div class="container">
+        <div class="section-kicker">आगे पढ़ें</div>
+        <h2 class="section-title mt-5">संबंधित गाइड</h2>
+        <div class="related-grid mt-8">
+          {related.map((item) => (
+            <a class="card related-card" href={topicUrl(item.slug)}>
+              <span class="text-sm text-white/70">{TOPIC_GROUPS[item.group].label}</span>
+              <strong class="mt-2 block text-lg">{item.h1}</strong>
+              <span class="mt-2 block text-sm prose-muted">{item.metaDescription}</span>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="sources" class="section pt-0">
+      <div class="container card">
+        <h2 class="text-2xl">स्रोत और तथ्य-जाँच</h2>
+        <p class="prose-muted mt-4">तथ्य-जाँच: {CHECKED_DATE}। इस पृष्ठ पर उपयोग किए गए आधिकारिक स्रोत:</p>
+        <ul class="source-list mt-4">
+          {sources.map((source) => (
+            <li>
+              <a class="underline" href={source.url} target="_blank" rel="noreferrer">{source.label}</a>
+              <span class="text-white/70"> — {source.use}</span>
+            </li>
+          ))}
+        </ul>
+        <p class="prose-muted mt-5">{VOLATILE_NOTE}</p>
+        <p class="prose-muted mt-3">{INDEPENDENT_DISCLAIMER}</p>
+        <div class="mt-6 flex flex-wrap gap-3">
+          <a class="badge-link" href="/">← मुख्य गाइड</a>
+          <a class="badge-link" href="/#guides">सभी विषय</a>
+          <a class="badge-link" href="/#gallery">फ़ोटो गैलरी</a>
+          <a class="badge-link" href={ATTRACTION.mapsUrl} target="_blank" rel="noreferrer">Google Maps ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-white/10 py-10">
+    <div class="container footer-note">
+      <p class="m-0">{INDEPENDENT_DISCLAIMER}</p>
+    </div>
+  </footer>
+</BaseLayout>

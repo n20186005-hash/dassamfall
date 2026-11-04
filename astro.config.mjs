@@ -11,6 +11,8 @@ const SITE = process.env.SITE_URL?.trim() || 'https://dassamfall.com';
 export default defineConfig({
   site: SITE,
   output: 'static',
+  // एक ही canonical रूप: /<slug>/ — sitemap, canonical और आंतरिक लिंक सभी मेल खाएँ।
+  trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()],
   },

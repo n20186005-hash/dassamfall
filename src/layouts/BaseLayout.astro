@@ -1,7 +1,7 @@
 ---
 import '../styles/global.css';
 import CookieConsent from '../components/CookieConsent.astro';
-import { SITE_NAME } from '../data/site';
+import { SITE_NAME, INDEPENDENT_DISCLAIMER } from '../data/site';
 
 interface Props {
   title: string;
@@ -15,6 +15,31 @@ interface Props {
 const { title, description, image = '/images/dassam-falls-02.jpg', jsonLd = [], robots = 'index,follow', canonicalPath } = Astro.props;
 const canonical = Astro.site ? new URL(canonicalPath || Astro.url.pathname, Astro.site).toString() : undefined;
 const ogImage = Astro.site ? new URL(image, Astro.site).toString() : image;
+const siteRoot = Astro.site ? Astro.site.toString().replace(/\/$/, '') : '';
+
+// Site-wide identity graph. The publisher is explicitly an independent third party,
+// never the government or the attraction management.
+const siteJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebSite',
+      '@id': `${siteRoot}#website`,
+      url: `${siteRoot}/`,
+      name: SITE_NAME,
+      inLanguage: 'hi',
+      publisher: { '@id': `${siteRoot}#publisher` },
+    },
+    {
+      '@type': 'Organization',
+      '@id': `${siteRoot}#publisher`,
+      name: SITE_NAME,
+      url: `${siteRoot}/`,
+      description: INDEPENDENT_DISCLAIMER,
+    },
+  ],
+};
+const allJsonLd = [siteJsonLd, ...jsonLd];
 ---
 
 <!doctype html>
@@ -45,7 +70,7 @@ const ogImage = Astro.site ? new URL(image, Astro.site).toString() : image;
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-    {jsonLd.map((entry) => (
+    {allJsonLd.map((entry) => (
       <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />
     ))}
   </head>

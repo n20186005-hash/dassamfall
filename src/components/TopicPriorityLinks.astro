@@ -1,0 +1,26 @@
+---
+// Homepage P0 quick links: the four queries Google Search Console already shows.
+import { TOPICS, topicUrl } from '../data/topics';
+
+const priority = TOPICS.filter((topic) => topic.priority === 'P0').map((topic) => ({
+  title: topic.h1,
+  url: topicUrl(topic.slug),
+  description: topic.metaDescription,
+}));
+---
+
+<section id="quick-guides" class="section pt-0">
+  <div class="container">
+    <div class="section-kicker">सीधे उत्तर</div>
+    <h2 class="section-title mt-5">सबसे ज़्यादा पूछे जाने वाले सवाल</h2>
+    <div class="related-grid mt-8">
+      {priority.map((item) => (
+        <a class="card related-card" href={item.url}>
+          <strong class="text-lg">{item.title}</strong>
+          <span class="mt-2 block text-sm prose-muted">{item.description}</span>
+        </a>
+      ))}
+    </div>
+    <p class="mt-6"><a class="badge-link" href="#guides">सभी विषय-गाइड देखें →</a></p>
+  </div>
+</section>

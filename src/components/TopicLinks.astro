@@ -1,0 +1,43 @@
+---
+// Full 35-topic cluster for the homepage (#guides). Data is precomputed so the
+// template contains no nested multi-line expressions inside conditionals.
+import { TOPICS, TOPIC_GROUPS, TOPIC_GROUP_ORDER, PRIORITY_LABELS, topicUrl } from '../data/topics';
+
+const clusters = TOPIC_GROUP_ORDER.map((group) => ({
+  label: TOPIC_GROUPS[group].label,
+  description: TOPIC_GROUPS[group].description,
+  items: TOPICS.filter((topic) => topic.group === group).map((topic) => ({
+    title: topic.h1,
+    url: topicUrl(topic.slug),
+    isPriority: topic.priority === 'P0',
+    priorityLabel: PRIORITY_LABELS.P0,
+  })),
+}));
+const total = TOPICS.length;
+---
+
+<section id="guides" class="section">
+  <div class="container">
+    <div class="section-kicker">विस्तृत गाइड</div>
+    <h2 class="section-title mt-5">दशम जलप्रपात: {total} विषय-गाइड</h2>
+    <p class="prose-muted mt-4">
+      हर गाइड एक अलग सवाल का सीधा उत्तर देती है — नदी और भूगोल, राँची से पहुँच, समय व मौसम, सुरक्षा,
+      परिवार और यात्रा-मार्ग। तथ्य-जाँच 4 नवंबर 2026; खुलने का समय, शुल्क और रास्ते जैसी बदलने वाली जानकारी
+      के लिए संबंधित पृष्ठ पर स्रोत और जाँच-सुझाव दिए गए हैं।
+    </p>
+    {clusters.map((cluster) => (
+      <div class="cluster-group mt-9">
+        <h3 class="text-2xl">{cluster.label}</h3>
+        <p class="prose-muted mt-2 text-sm">{cluster.description}</p>
+        <ul class="cluster-links mt-4">
+          {cluster.items.map((item) => (
+            <li>
+              <a href={item.url}>{item.title}</a>
+              {item.isPriority && <span class="p0-chip">{item.priorityLabel}</span>}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>
